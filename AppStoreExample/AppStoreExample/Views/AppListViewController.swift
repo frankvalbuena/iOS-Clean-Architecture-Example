@@ -13,12 +13,23 @@ final class AppListViewController: UIViewController {
     fileprivate let listViewModel = AppListViewModel(locator: UseCaseLocator.defaultLocator)
     
     weak var listView: AppListView?
+    var warningAlert: UIAlertController? = nil
     @IBOutlet weak var categoriesButton: UIButton?
     @IBOutlet weak var listContainerView: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureBinding()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let warningAlert = self.warningAlert {
+            present(warningAlert, animated: true, completion: nil)
+            self.warningAlert = nil
+        }
     }
     
     @IBAction func onCategory() {
@@ -46,6 +57,18 @@ private extension AppListViewController {
         guard let listContainerView = self.listContainerView else {
             return
         }
+        
+        if let warning = listViewModel.warningMessage {
+            let alert = UIAlertController(title: "An error has occurred",
+                                          message: warning,
+                                          preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel) { _ in
+                alert.dismiss(animated: true, completion: nil)
+            })
+            self.warningAlert = alert
+        }
+        
         let listView: UIView = UIDevice.current.userInterfaceIdiom == .pad ?
             AppGridListView(frame: listContainerView.bounds) :
             AppTableListView(frame: listContainerView.bounds)

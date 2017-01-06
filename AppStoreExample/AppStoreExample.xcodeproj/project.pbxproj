@@ -32,6 +32,7 @@
 		73276F561E1F51D200BC2B4F /* AppGridListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73276F551E1F51D200BC2B4F /* AppGridListViewCell.xib */; };
 		73276F581E1FE53800BC2B4F /* AppCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */; };
 		73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F591E1FE62E00BC2B4F /* AppCategoriesViewModel.swift */; };
+		73276F5C1E200E7200BC2B4F /* AppDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */; };
 		735B477E1E1DD6C500EB3D13 /* GetAppDetailsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B477D1E1DD6C500EB3D13 /* GetAppDetailsTest.swift */; };
 		735B47801E1DE08100EB3D13 /* UseCaseLocatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B477F1E1DE08100EB3D13 /* UseCaseLocatorTest.swift */; };
 		735B47841E1DE5B000EB3D13 /* AppListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B47831E1DE5B000EB3D13 /* AppListViewModel.swift */; };
@@ -95,6 +96,7 @@
 		73276F551E1F51D200BC2B4F /* AppGridListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppGridListViewCell.xib; path = Views/AppGridListViewCell.xib; sourceTree = "<group>"; };
 		73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCategoriesViewController.swift; path = Views/AppCategoriesViewController.swift; sourceTree = "<group>"; };
 		73276F591E1FE62E00BC2B4F /* AppCategoriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCategoriesViewModel.swift; path = ViewModels/AppCategoriesViewModel.swift; sourceTree = "<group>"; };
+		73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDetailsViewController.swift; path = Views/AppDetailsViewController.swift; sourceTree = "<group>"; };
 		735B477D1E1DD6C500EB3D13 /* GetAppDetailsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetAppDetailsTest.swift; path = UseCases/GetAppDetailsTest.swift; sourceTree = "<group>"; };
 		735B477F1E1DE08100EB3D13 /* UseCaseLocatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCaseLocatorTest.swift; path = UseCases/UseCaseLocatorTest.swift; sourceTree = "<group>"; };
 		735B47831E1DE5B000EB3D13 /* AppListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppListViewModel.swift; path = ViewModels/AppListViewModel.swift; sourceTree = "<group>"; };
@@ -260,11 +262,12 @@
 		73236C521E1C3EA200B0B9CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				73276F541E1F384800BC2B4F /* Segues */,
 				735B478F1E1EEB1B00EB3D13 /* ListViews */,
+				73276F541E1F384800BC2B4F /* Segues */,
+				73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */,
+				73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */,
 				735B478D1E1ED6B200EB3D13 /* AppListViewController.swift */,
 				735B478B1E1EA55D00EB3D13 /* AppSyncViewController.swift */,
-				73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				73FC6AC41E1CC0D30086D09B /* UseCaseImpl.swift in Sources */,
 				731C9B2D1E1C6E9C00B3C5B9 /* ItunesWebService.swift in Sources */,
 				73236C4B1E1C3A5200B0B9CC /* UseCaseLocator.swift in Sources */,
+				73276F5C1E200E7200BC2B4F /* AppDetailsViewController.swift in Sources */,
 				73236C451E1C387900B0B9CC /* AppsRepository.swift in Sources */,
 				735B47841E1DE5B000EB3D13 /* AppListViewModel.swift in Sources */,
 				73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */,
