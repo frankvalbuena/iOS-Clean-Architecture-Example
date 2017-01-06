@@ -23,13 +23,14 @@ final class AppCategoriesViewController: UITableViewController {
 
 private extension AppCategoriesViewController {
     func configureUI() {
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: type(of: self).cellId)
         self.navigationItem.title = "Categories"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                                  target: self,
                                                                  action: #selector(AppCategoriesViewController.onDismiss))
         
-        if let row = viewModel.categories.index(of: viewModel.selectedCategory ?? "All Apps") {
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: type(of: self).cellId)
+        self.clearsSelectionOnViewWillAppear = false
+        if let row = viewModel.categories.index(of: viewModel.selectedCategory ?? type(of: viewModel).allApps) {
             self.tableView.selectRow(at: IndexPath(row: row, section: 0),
                                      animated: false,
                                      scrollPosition: .none)
@@ -50,9 +51,11 @@ extension AppCategoriesViewController {
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: type(of: self).cellId)!
+        let isSelected = self.tableView.indexPathForSelectedRow == indexPath
         
         cell.textLabel?.text = viewModel.categories[indexPath.row]
-        cell.accessoryType =  tableView.indexPathForSelectedRow == indexPath ? .checkmark : .none
+        cell.accessoryType =  isSelected ? .checkmark : .none
+        cell.selectionStyle = isSelected ? .none : .gray
         return cell
     }
 }

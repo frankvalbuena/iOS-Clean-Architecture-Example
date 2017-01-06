@@ -17,5 +17,7 @@ class UseCaseLocatorTest: XCTestCase {
         
         XCTAssertNotNil(locator.getUseCase(ofType: GetAppDetails.self), "GetAppDetails is mandatory")
         XCTAssertNotNil(locator.getUseCase(ofType: ListApps.self), "ListApps is mandatory")
+        XCTAssertNotNil(locator.getUseCase(ofType: ListCategories.self), "ListCategories is mandatory")
+        XCTAssertNotNil(locator.getUseCase(ofType: SyncAppData.self), "SyncAppData is mandatory")
     }
 }

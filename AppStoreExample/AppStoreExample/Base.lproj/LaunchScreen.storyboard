@@ -21,37 +21,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jOB-TD-G7y">
-                                <rect key="frame" x="52" y="225" width="222" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppStoreExample" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6V-oA-CkW">
-                                        <rect key="frame" x="0.0" y="0.0" width="222" height="33.5"/>
-                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="28"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Ga-oT-4Pl">
-                                <rect key="frame" x="105" y="265" width="143" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Francisco Valbuena" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-oN-X5w">
-                                        <rect key="frame" x="0.0" y="0.0" width="142.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AppStoreExample" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6V-oA-CkW">
+                                <rect key="frame" x="49" y="224" width="222" height="33.5"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Francisco Valbuena" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdn-oN-X5w">
+                                <rect key="frame" x="89" y="265" width="142.5" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.3920017211721627" blue="0.12111534878031238" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="c6V-oA-CkW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="82r-xI-G66"/>
-                            <constraint firstItem="Zdn-oN-X5w" firstAttribute="top" secondItem="c6V-oA-CkW" secondAttribute="bottom" constant="6.5" id="X0v-x8-Exh"/>
-                            <constraint firstItem="c6V-oA-CkW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hSk-mg-YJ4"/>
-                            <constraint firstItem="Zdn-oN-X5w" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="jmK-tI-AUX"/>
+                            <constraint firstItem="Zdn-oN-X5w" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="MjD-AD-sxe"/>
+                            <constraint firstItem="c6V-oA-CkW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="S0I-8M-34o"/>
+                            <constraint firstItem="c6V-oA-CkW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="SWj-0w-LXO"/>
+                            <constraint firstItem="Zdn-oN-X5w" firstAttribute="top" secondItem="c6V-oA-CkW" secondAttribute="bottom" constant="7.5" id="xHm-7B-tLu"/>
                         </constraints>
                     </view>
                 </viewController>

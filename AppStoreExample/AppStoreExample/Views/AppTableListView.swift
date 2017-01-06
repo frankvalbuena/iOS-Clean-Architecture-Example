@@ -19,7 +19,7 @@ class AppTableListView: UITableView  {
     weak var listDelegate: AppListViewDelegate?
     
     init(frame: CGRect) {
-        super.init(frame: frame, style: .grouped)
+        super.init(frame: frame, style: .plain)
         configure()
     }
     

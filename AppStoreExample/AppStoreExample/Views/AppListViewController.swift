@@ -82,10 +82,13 @@ extension AppListViewController: AppListViewDelegate {
         thumb.onDidLoad = { [weak self, weak thumb, weak cell] in
             if thumb == self?.thumbnail(atIndex: index) {
                 cell?.iconImageView?.image = thumb?.icon
+                (cell as? UIView)?.setNeedsLayout()
             }
         }
         thumb.loadData()
         cell.iconImageView?.image = thumb.icon
+        cell.iconImageView?.layer.cornerRadius = 10.0
+        cell.iconImageView?.layer.masksToBounds = true
         cell.nameLabel?.text = thumb.name
         cell.nameLabel?.numberOfLines = 0
         cell.nameLabel?.minimumScaleFactor = 0.5
