@@ -10,4 +10,5 @@ import Foundation
 
 enum AppSegueID: String {
     case showList
+    case showDetail
 }

@@ -18,9 +18,9 @@ final class AppThumbnailViewModel {
                                                          maximumActiveDownloads: 10,
                                                          imageCache: AutoPurgingImageCache())
     fileprivate var iconURL: URL? = nil
-    fileprivate var id: String
     fileprivate lazy var placeholderIcon: UIImage? = self.buildPlaceholderImage()
     
+    var appID: String
     var name: String
     var icon: UIImage? = nil
     var onDidLoad: (() -> Void)? = nil
@@ -28,7 +28,7 @@ final class AppThumbnailViewModel {
     init(thumbnail: AppThumbnailDTO) {
         name = thumbnail.name
         iconURL = thumbnail.iconURL
-        id = thumbnail.appstoreID
+        appID = thumbnail.appstoreID
     }
     
     func loadData() {
@@ -64,6 +64,6 @@ private extension AppThumbnailViewModel {
 
 extension AppThumbnailViewModel: Equatable {
     public static func ==(lhs: AppThumbnailViewModel, rhs: AppThumbnailViewModel) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.appID == rhs.appID
     }
 }

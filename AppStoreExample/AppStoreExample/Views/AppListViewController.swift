@@ -13,6 +13,7 @@ final class AppListViewController: UIViewController {
     fileprivate let listViewModel = AppListViewModel(locator: UseCaseLocator.defaultLocator)
     
     weak var listView: AppListView?
+    var selectedApp: AppThumbnailViewModel? = nil
     var warningAlert: UIAlertController? = nil
     @IBOutlet weak var categoriesButton: UIButton?
     @IBOutlet weak var listContainerView: UIView?
@@ -25,10 +26,20 @@ final class AppListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.selectedApp = nil
         
         if let warningAlert = self.warningAlert {
             present(warningAlert, animated: true, completion: nil)
             self.warningAlert = nil
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectedApp = self.selectedApp, segue.identifier == AppSegueID.showDetail.rawValue {
+            let detail = (segue.destination as? UINavigationController)?.topViewController as? AppDetailsViewController
+            
+            detail?.viewModel = AppDetailsViewModel(appID: selectedApp.appID,
+                                                    locator: UseCaseLocator.defaultLocator)
         }
     }
     
@@ -118,7 +129,8 @@ extension AppListViewController: AppListViewDelegate {
     }
     
     func didSelect(cell: AppListCell, atIndex index: Int) {
-        // TODO: Present Detail View Controller
+        self.selectedApp = thumbnail(atIndex: index)
+        self.performSegue(withIdentifier: AppSegueID.showDetail.rawValue, sender: self)
     }
     
     private func thumbnail(atIndex index: Int) -> AppThumbnailViewModel {
