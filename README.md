@@ -1,5 +1,5 @@
 # iOS-Clean-Architecture-Example
-An iOS app designed using [Clean Architecture](https://github.com/mp911de/CleanArchitecture "Clean Architecture") and [MVVM](https://www.objc.io/issues/13-architecture/mvvm). 
+An iOS app designed using [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) and [MVVM](https://www.objc.io/issues/13-architecture/mvvm). 
 
 ## Description of The App
 This is an AppStore Example app, which fetches the data using the service https://itunes.apple.com/us/rss/topfreeapplications/limit=20/json, the data is stored locally on the app providing offline support. The app processes the data by categories with a UI that mimics the real app. This is an universal app showing the apps on a Grid for the iPad and on a list for the iPhone.
