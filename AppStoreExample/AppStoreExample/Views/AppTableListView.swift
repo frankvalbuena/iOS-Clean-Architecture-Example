@@ -35,6 +35,7 @@ private extension AppTableListView {
     func configure() {
         self.delegate = self
         self.dataSource = self
+        self.separatorInset = .zero
         register(UITableViewCell.self, forCellReuseIdentifier: AppTableListView.cellId)
     }
 }
@@ -49,7 +50,7 @@ extension AppTableListView: AppListView {
     func reloadData(animated: Bool) {
         if animated {
             UIView.transition(with: self,
-                              duration: 1,
+                              duration: 2,
                               options: .transitionCrossDissolve,
                               animations: UITableView.reloadData(self),
                               completion: nil)
