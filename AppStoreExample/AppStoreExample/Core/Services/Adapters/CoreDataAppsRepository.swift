@@ -40,7 +40,7 @@ extension AppSyncDataEntity: AppData {
 
 class CoreDataAppsRepository: AppsRepository {
     var lastSyncDate: Date? {
-        get { return UserDefaults.standard.value(forKey:"lastSyncDate") as! Date }
+        get { return UserDefaults.standard.value(forKey:"lastSyncDate") as? Date }
         set(value) { UserDefaults.standard.set(value, forKey: "lastSyncDate") }
     }
     
