@@ -48,6 +48,8 @@
 		73603B9C1E1D59F90016C6F2 /* SyncAppDataTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73603B9B1E1D59F90016C6F2 /* SyncAppDataTest.swift */; };
 		73603B9E1E1D6BFC0016C6F2 /* MockAppsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73603B9D1E1D6BFC0016C6F2 /* MockAppsRepository.swift */; };
 		73603BA21E1D70E40016C6F2 /* AppsRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73603BA01E1D708B0016C6F2 /* AppsRepositoryTest.swift */; };
+		73E71E6D1E207B74004B6DFD /* CoreDataAppsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */; };
+		73E71E701E207E3D004B6DFD /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E71E6E1E207E3D004B6DFD /* CoreDataModel.xcdatamodeld */; };
 		73FC6AC41E1CC0D30086D09B /* UseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC6AC31E1CC0D30086D09B /* UseCaseImpl.swift */; };
 		73FC6AC61E1CC1A40086D09B /* SyncAppDataImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC6AC51E1CC1A40086D09B /* SyncAppDataImpl.swift */; };
 		D83E5539839A578FA67F1D78 /* Pods_AppStoreExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F960678015030BDC8D5C7B1F /* Pods_AppStoreExampleTests.framework */; };
@@ -112,6 +114,8 @@
 		73603B9B1E1D59F90016C6F2 /* SyncAppDataTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncAppDataTest.swift; path = UseCases/SyncAppDataTest.swift; sourceTree = "<group>"; };
 		73603B9D1E1D6BFC0016C6F2 /* MockAppsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockAppsRepository.swift; path = MockObjects/MockAppsRepository.swift; sourceTree = "<group>"; };
 		73603BA01E1D708B0016C6F2 /* AppsRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppsRepositoryTest.swift; path = Services/AppsRepositoryTest.swift; sourceTree = "<group>"; };
+		73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataAppsRepository.swift; path = Core/Services/Adapters/CoreDataAppsRepository.swift; sourceTree = "<group>"; };
+		73E71E6F1E207E3D004B6DFD /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		73FC6AC31E1CC0D30086D09B /* UseCaseImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCaseImpl.swift; path = Core/UseCases/Implementations/UseCaseImpl.swift; sourceTree = "<group>"; };
 		73FC6AC51E1CC1A40086D09B /* SyncAppDataImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncAppDataImpl.swift; path = Core/UseCases/Implementations/SyncAppDataImpl.swift; sourceTree = "<group>"; };
 		F960678015030BDC8D5C7B1F /* Pods_AppStoreExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +233,8 @@
 		73236C4F1E1C3D2100B0B9CC /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
+				73465A731E2096D8008C2A35 /* CoreDataModel */,
+				73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */,
 				73603B991E1D46780016C6F2 /* InMemoryAppsRepository.swift */,
 				731C9B2C1E1C6E9C00B3C5B9 /* ItunesWebService.swift */,
 			);
@@ -278,6 +284,14 @@
 				73276F521E1F380A00BC2B4F /* AppSegueID.swift */,
 			);
 			name = Segues;
+			sourceTree = "<group>";
+		};
+		73465A731E2096D8008C2A35 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				73E71E6E1E207E3D004B6DFD /* CoreDataModel.xcdatamodeld */,
+			);
+			name = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		735B478F1E1EEB1B00EB3D13 /* ListViews */ = {
@@ -555,6 +569,7 @@
 			files = (
 				73603B981E1D452A0016C6F2 /* MockAppStoreService.swift in Sources */,
 				73160B1C1E1DA99900652C99 /* ListCategoriesImpl.swift in Sources */,
+				73E71E701E207E3D004B6DFD /* CoreDataModel.xcdatamodeld in Sources */,
 				735B478E1E1ED6B200EB3D13 /* AppListViewController.swift in Sources */,
 				73236C4E1E1C3B4B00B0B9CC /* SyncAppData.swift in Sources */,
 				735B478A1E1DE67E00EB3D13 /* AppThumbnailViewModel.swift in Sources */,
@@ -567,6 +582,7 @@
 				73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */,
 				735B47861E1DE60400EB3D13 /* AppSyncViewModel.swift in Sources */,
 				73276F511E1F296E00BC2B4F /* AppGridListView.swift in Sources */,
+				73E71E6D1E207B74004B6DFD /* CoreDataAppsRepository.swift in Sources */,
 				73160B1A1E1DA88800652C99 /* ListAppsImpl.swift in Sources */,
 				73FC6AC61E1CC1A40086D09B /* SyncAppDataImpl.swift in Sources */,
 				73160B221E1DBCBD00652C99 /* GetAppDetailsImp.swift in Sources */,
@@ -820,6 +836,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		73E71E6E1E207E3D004B6DFD /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				73E71E6F1E207E3D004B6DFD /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 73E71E6F1E207E3D004B6DFD /* CoreDataModel.xcdatamodel */;
+			name = CoreDataModel.xcdatamodeld;
+			path = Core/Services/Adapters/CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 73236C111E1C334E00B0B9CC /* Project object */;
 }

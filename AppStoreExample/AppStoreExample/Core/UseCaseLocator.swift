@@ -13,7 +13,7 @@ protocol UseCaseLocatorProtocol {
 }
 
 class UseCaseLocator: UseCaseLocatorProtocol {
-    static let defaultLocator = UseCaseLocator(repository: InMemoryAppsRepository(),
+    static let defaultLocator = UseCaseLocator(repository: CoreDataAppsRepository(),
                                                service: ItunesWebService())
     
     fileprivate let repository: AppsRepository

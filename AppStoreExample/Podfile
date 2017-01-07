@@ -4,6 +4,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'AppStoreExample' do
+    pod "MagicalRecord"
     pod 'Alamofire', '~> 4.0'
     pod 'AlamofireImage', '~> 3.1'
     pod 'OHHTTPStubs'

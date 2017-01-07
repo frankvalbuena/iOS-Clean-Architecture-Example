@@ -12,7 +12,11 @@ import XCTest
 class AppsRespositoryTest: XCTestCase {
     
     // Add here all the repositories you want to test
-    let repositoriesToTest: [AppsRepository] = [InMemoryAppsRepository()]
+    let repositoriesToTest: [AppsRepository] = [ CoreDataAppsRepository(), InMemoryAppsRepository()]
+    
+    override func tearDown() {
+        repositoriesToTest.forEach { $0.removeAllApps() }
+    }
     
     func testSaving() {
         let mockApp = buildApp(appstoreId: "123", rank: 0)
@@ -20,7 +24,7 @@ class AppsRespositoryTest: XCTestCase {
         save(apps: [mockApp]) { repository in
             let apps = repository.listAllApps()
             XCTAssertEqual(apps.count, 1, "Single Mock Saved")
-            
+            print("apps count \(apps.count)")
             XCTAssertEqual(apps.first!.appstoreID, mockApp.appstoreID, "input must match output")
             XCTAssertEqual(apps.first!.shortName, mockApp.shortName, "input must match output")
             XCTAssertEqual(apps.first!.iconURL, mockApp.iconURL, "input must match output")

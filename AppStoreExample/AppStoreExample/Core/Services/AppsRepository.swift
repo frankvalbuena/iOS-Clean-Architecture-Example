@@ -22,5 +22,5 @@ protocol AppsRepository {
     func listApps(byCategory category: String) -> AnyCollection<AppData>
     
     func removeAllApps()
-    func save(apps: [AppData], completion: (SaveStatus) -> Void)
+    func save(apps: [AppData], completion: @escaping (SaveStatus) -> Void)
 }

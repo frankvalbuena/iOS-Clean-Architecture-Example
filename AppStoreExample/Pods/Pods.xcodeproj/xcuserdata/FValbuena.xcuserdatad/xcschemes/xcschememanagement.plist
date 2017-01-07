@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MagicalRecord.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OHHTTPStubs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,6 +37,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>01E1ACBC8E1EA3FBC672E55EDEA00D00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>748F1C7F61D88F3FB355A8E829489671</key>
 		<dict>
 			<key>primary</key>
@@ -42,12 +52,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
+		<key>96D028D8410E9A401CDCEFD40406EEC0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD143E056DF27CA3C5CF681791227E13</key>
+		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
 		<dict>
 			<key>primary</key>
 			<true/>

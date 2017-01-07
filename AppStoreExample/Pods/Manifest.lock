@@ -2,6 +2,9 @@ PODS:
   - Alamofire (4.2.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
   - OHHTTPStubs (5.2.3):
     - OHHTTPStubs/Default (= 5.2.3)
   - OHHTTPStubs/Core (5.2.3)
@@ -21,14 +24,16 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
+  - MagicalRecord
   - OHHTTPStubs
   - OHHTTPStubs/Swift
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
 
-PODFILE CHECKSUM: 816138af99da3e68e47e6d9c3212a97bbaf2ae1b
+PODFILE CHECKSUM: db2f266efb04c0d0b7c319312558d42a0b23384b
 
 COCOAPODS: 1.1.1

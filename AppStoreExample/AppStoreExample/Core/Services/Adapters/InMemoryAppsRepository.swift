@@ -35,7 +35,7 @@ class InMemoryAppsRepository: AppsRepository {
         allApps.removeAll(keepingCapacity: true)
     }
     
-    func save(apps: [AppData], completion: (SaveStatus) -> Void) {
+    func save(apps: [AppData], completion: @escaping (SaveStatus) -> Void) {
         apps.forEach { allApps[$0.appstoreID] = $0 }
         lastSyncDate = Date()
         completion(.success)
