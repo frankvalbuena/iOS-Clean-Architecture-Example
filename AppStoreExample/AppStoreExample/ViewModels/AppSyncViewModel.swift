@@ -8,43 +8,51 @@
 
 import Foundation
 
+enum AppSyncActions {
+    case idle
+    case dataWasFetched(error: Error?)
+    case fetchingData
+}
+
+typealias ActionStateListener = (AppSyncActions) -> Void
+
 final class AppSyncViewModel {
     private let locator: UseCaseLocatorProtocol
     
-    var errorMessage: String? = nil
-    var hasDataToContinue: Bool = false
-    var onDidFinishSync: (() -> Void)? = nil
+    var appSyncStateListener: ActionStateListener? = nil
+    private(set) var appSyncState: AppSyncActions {
+        didSet{
+            appSyncStateListener?(appSyncState)
+        }
+    }
     
     init(locator: UseCaseLocatorProtocol) {
         self.locator = locator
+        appSyncState = .idle
     }
     
     func startSync() {
         guard let syncUseCase = locator.getUseCase(ofType: SyncAppData.self) else {
-            errorMessage = "An known error has occurred"
-            hasDataToContinue = false
-            onDidFinishSync?()
+            appSyncState = .dataWasFetched(error: Utils.createError("An known error has occurred"))
             return
         }
+        appSyncState = .fetchingData
         syncUseCase.sync { [weak self] result in
             self?.didFinishSync(result: result, hasCachedData: syncUseCase.hasCachedData)
         }
     }
-}
-
-private extension AppSyncViewModel {
-    func didFinishSync(result: SyncResult, hasCachedData: Bool) {
+    
+    private func didFinishSync(result: SyncResult, hasCachedData: Bool) {
         switch result {
         case .success:
-            errorMessage = nil
-            hasDataToContinue = true
-            onDidFinishSync?()
+            appSyncState = .dataWasFetched(error: nil)
         case .failure(error: .unknown):
-            hasDataToContinue = hasCachedData
-            errorMessage = !hasCachedData ? "Cannot connect to the AppStore, please try again later" : nil
+            let error = !hasCachedData ? Utils.createError("Cannot connect to the AppStore, please try again later") : nil
+            appSyncState = .dataWasFetched(error: error)
         case .failure(error: .notInternetConnection):
-            hasDataToContinue = hasCachedData
-            errorMessage = !hasCachedData ? "Please check your internet connection" : nil
+            let error = !hasCachedData ? Utils.createError("Please check your internet connection") : nil
+            appSyncState = .dataWasFetched(error: error)
         }
     }
+    
 }

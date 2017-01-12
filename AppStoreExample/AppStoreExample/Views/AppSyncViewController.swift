@@ -33,21 +33,29 @@ private extension AppSyncViewController {
         retryButton?.layer.borderColor = UIColor.darkGray.cgColor
         retryButton?.layer.borderWidth = 1.0
         retryButton?.layer.cornerRadius = 3.0
-        retryContainerView?.isHidden = true
     }
     
     func configureBinding() {
-        viewModel.onDidFinishSync = { [weak self] in
-            self?.onDidFinishSync()
+        viewModel.appSyncStateListener = {
+            [weak self] state in
+            
+            guard let `self` = self else { return }
+            
+            switch state {
+            case .dataWasFetched(let error):
+                guard let message = error else {
+                    self.performSegue(withIdentifier: AppSegueID.showList.rawValue, sender: self)
+                    return
+                }
+                self.retryContainerView?.isHidden = false
+                self.errorLabel?.text = message.localizedDescription
+                break
+            case .fetchingData:
+                self.retryContainerView?.isHidden = true
+            case .idle:
+                break
+            }
         }
     }
     
-    func onDidFinishSync() {
-        errorLabel?.text = viewModel.errorMessage
-        retryContainerView?.isHidden = viewModel.hasDataToContinue
-        
-        if viewModel.hasDataToContinue {
-            self.performSegue(withIdentifier: AppSegueID.showList.rawValue, sender: self)
-        }
-    }
 }
