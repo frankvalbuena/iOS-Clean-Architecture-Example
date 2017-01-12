@@ -40,9 +40,9 @@ final class AppSyncViewModel {
     
 }
 
-extension AppSyncViewModel {
-
-    fileprivate func didFinishSync(result: SyncResult, hasCachedData: Bool) {
+fileprivate extension AppSyncViewModel {
+    
+    func didFinishSync(result: SyncResult, hasCachedData: Bool) {
         switch result {
         case .success:
             appSyncState = .finish(errorMessage: nil)
