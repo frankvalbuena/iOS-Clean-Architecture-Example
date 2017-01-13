@@ -9,11 +9,19 @@
 import Foundation
 
 final class AppSyncViewModel {
+    
+    enum State {
+        case idle
+        case finish(errorMessage: String?)
+        case syncing
+    }
+    
     private let locator: UseCaseLocatorProtocol
     
-    var errorMessage: String? = nil
-    var hasDataToContinue: Bool = false
-    var onDidFinishSync: (() -> Void)? = nil
+    var onDidChangeState: ((State) -> Void)? = nil
+    fileprivate(set) var appSyncState: State = .idle {
+        didSet { onDidChangeState?(appSyncState) }
+    }
     
     init(locator: UseCaseLocatorProtocol) {
         self.locator = locator
@@ -21,30 +29,30 @@ final class AppSyncViewModel {
     
     func startSync() {
         guard let syncUseCase = locator.getUseCase(ofType: SyncAppData.self) else {
-            errorMessage = "An known error has occurred"
-            hasDataToContinue = false
-            onDidFinishSync?()
+            appSyncState = .finish(errorMessage: "An known error has occurred")
             return
         }
+        appSyncState = .syncing
         syncUseCase.sync { [weak self] result in
             self?.didFinishSync(result: result, hasCachedData: syncUseCase.hasCachedData)
         }
     }
+    
 }
 
-private extension AppSyncViewModel {
+fileprivate extension AppSyncViewModel {
+    
     func didFinishSync(result: SyncResult, hasCachedData: Bool) {
         switch result {
         case .success:
-            errorMessage = nil
-            hasDataToContinue = true
-            onDidFinishSync?()
+            appSyncState = .finish(errorMessage: nil)
         case .failure(error: .unknown):
-            hasDataToContinue = hasCachedData
-            errorMessage = !hasCachedData ? "Cannot connect to the AppStore, please try again later" : nil
+            let error = !hasCachedData ? "Cannot connect to the AppStore, please try again later" : nil
+            appSyncState = .finish(errorMessage: error)
         case .failure(error: .notInternetConnection):
-            hasDataToContinue = hasCachedData
-            errorMessage = !hasCachedData ? "Please check your internet connection" : nil
+            let error = !hasCachedData ? "Please check your internet connection" : nil
+            appSyncState = .finish(errorMessage: error)
         }
     }
+    
 }
