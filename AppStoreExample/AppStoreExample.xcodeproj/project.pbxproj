@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		47E82369792B40C3DAB1B5A3 /* Pods_AppStoreExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */; };
+		6C1D76A71E2D606B004B432C /* AppSyncViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */; };
+		6C1D76A91E2D6483004B432C /* AppListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */; };
+		6C1D76AB1E2D6DBC004B432C /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76AA1E2D6DBC004B432C /* ViewModelFactory.swift */; };
 		73160B1A1E1DA88800652C99 /* ListAppsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B191E1DA88800652C99 /* ListAppsImpl.swift */; };
 		73160B1C1E1DA99900652C99 /* ListCategoriesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */; };
 		73160B1E1E1DB9FD00652C99 /* ListAppsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */; };
@@ -70,6 +73,9 @@
 		2B3118DD56BC020EA4B1BF1D /* Pods-AppStoreExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.release.xcconfig"; sourceTree = "<group>"; };
 		3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54FAB44973C9E42BB27491A3 /* Pods-AppStoreExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.debug.xcconfig"; sourceTree = "<group>"; };
+		6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSyncViewModelTest.swift; path = ViewModels/AppSyncViewModelTest.swift; sourceTree = "<group>"; };
+		6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppListViewModelTest.swift; path = ViewModels/AppListViewModelTest.swift; sourceTree = "<group>"; };
+		6C1D76AA1E2D6DBC004B432C /* ViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelFactory.swift; path = ViewModels/ViewModelFactory.swift; sourceTree = "<group>"; };
 		73160B191E1DA88800652C99 /* ListAppsImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsImpl.swift; path = Core/UseCases/Implementations/ListAppsImpl.swift; sourceTree = "<group>"; };
 		73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCategoriesImpl.swift; path = Core/UseCases/Implementations/ListCategoriesImpl.swift; sourceTree = "<group>"; };
 		73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsTest.swift; path = UseCases/ListAppsTest.swift; sourceTree = "<group>"; };
@@ -338,6 +344,9 @@
 		73603B931E1D43F20016C6F2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */,
+				6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */,
+				6C1D76AA1E2D6DBC004B432C /* ViewModelFactory.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -610,10 +619,13 @@
 				73603BA21E1D70E40016C6F2 /* AppsRepositoryTest.swift in Sources */,
 				735B477E1E1DD6C500EB3D13 /* GetAppDetailsTest.swift in Sources */,
 				73160B1E1E1DB9FD00652C99 /* ListAppsTest.swift in Sources */,
+				6C1D76A91E2D6483004B432C /* AppListViewModelTest.swift in Sources */,
 				73603B9C1E1D59F90016C6F2 /* SyncAppDataTest.swift in Sources */,
+				6C1D76AB1E2D6DBC004B432C /* ViewModelFactory.swift in Sources */,
 				73160B241E1DD28600652C99 /* ListCategoriesTest.swift in Sources */,
 				73603B951E1D44320016C6F2 /* ItunesWebServiceTest.swift in Sources */,
 				735B47801E1DE08100EB3D13 /* UseCaseLocatorTest.swift in Sources */,
+				6C1D76A71E2D606B004B432C /* AppSyncViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
