@@ -11,7 +11,6 @@ import Foundation
 
 protocol ViewModelFactoryProtocol {
     static func createViewModel<T>(ofType: T.Type,
-                                repository: MockAppsRepository,
                                 response: AppStoreResponse) -> T?
 }
 
@@ -45,17 +44,27 @@ struct ViewModelFactory: ViewModelFactoryProtocol {
     rank: 1)
     
     static func createViewModel<T>(ofType type: T.Type,
-                                    repository: MockAppsRepository = MockAppsRepository(),
                                     response: AppStoreResponse = .success(apps:[ViewModelFactory.demoApp])) -> T? {
         let service = MockAppStoreService(mockResponse: response)
+        let repository = MockAppsRepository()
         let locator = UseCaseLocator(repository: repository, service: service)
         
-        if type == AppListViewModel.self {
-            return AppListViewModel(locator: locator) as? T
-        } else if type == AppSyncViewModel.self {
+        if type == AppSyncViewModel.self {
             return AppSyncViewModel(locator: locator) as? T
+        } else if type == AppListViewModel.self {
+            syncApps(withLocator: locator)
+            return AppListViewModel(locator: locator) as? T
         } else {
+            syncApps(withLocator: locator)
             return AppCategoriesViewModel(locator: locator) as? T
         }
+    }
+    
+}
+
+private extension ViewModelFactory {
+    static func syncApps(withLocator locator: UseCaseLocator) {
+        let syncImplementator = locator.getUseCase(ofType: SyncAppData.self)
+        syncImplementator?.sync({ (result) in})
     }
 }
