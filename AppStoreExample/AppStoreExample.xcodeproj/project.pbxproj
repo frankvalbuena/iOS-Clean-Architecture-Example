@@ -12,6 +12,7 @@
 		45487DD81E2EE40B00E0248B /* MockImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DD71E2EE40B00E0248B /* MockImageDownloader.swift */; };
 		45487DDC1E2EE7F600E0248B /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDB1E2EE7F600E0248B /* ViewModelFactory.swift */; };
 		45487DDE1E2EE81D00E0248B /* AppDetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */; };
+		45487DE01E2F0E4000E0248B /* AppThumbnailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */; };
 		47E82369792B40C3DAB1B5A3 /* Pods_AppStoreExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */; };
 		6C1D76A71E2D606B004B432C /* AppSyncViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */; };
 		6C1D76A91E2D6483004B432C /* AppListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */; };
@@ -81,6 +82,7 @@
 		45487DD71E2EE40B00E0248B /* MockImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockImageDownloader.swift; path = MockObjects/MockImageDownloader.swift; sourceTree = "<group>"; };
 		45487DDB1E2EE7F600E0248B /* ViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelFactory.swift; path = ViewModels/Utils/ViewModelFactory.swift; sourceTree = "<group>"; };
 		45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDetailsViewModelTest.swift; path = ViewModels/AppDetailsViewModelTest.swift; sourceTree = "<group>"; };
+		45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppThumbnailViewModelTest.swift; path = ViewModels/AppThumbnailViewModelTest.swift; sourceTree = "<group>"; };
 		54FAB44973C9E42BB27491A3 /* Pods-AppStoreExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.debug.xcconfig"; sourceTree = "<group>"; };
 		6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSyncViewModelTest.swift; path = ViewModels/AppSyncViewModelTest.swift; sourceTree = "<group>"; };
 		6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppListViewModelTest.swift; path = ViewModels/AppListViewModelTest.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */,
 				45487DD01E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift */,
 				45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */,
+				45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45487DD81E2EE40B00E0248B /* MockImageDownloader.swift in Sources */,
+				45487DE01E2F0E4000E0248B /* AppThumbnailViewModelTest.swift in Sources */,
 				45487DDC1E2EE7F600E0248B /* ViewModelFactory.swift in Sources */,
 				73603BA21E1D70E40016C6F2 /* AppsRepositoryTest.swift in Sources */,
 				735B477E1E1DD6C500EB3D13 /* GetAppDetailsTest.swift in Sources */,

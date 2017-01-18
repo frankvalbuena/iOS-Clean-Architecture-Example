@@ -12,9 +12,15 @@ import UIKit
 
 struct MockImageDownloader: ImageDownloaderService {
     
+    typealias Image = UIImage
+    
     enum DownloaderResult {
         case sucess
         case failure(errorMessage: String)
+    }
+    
+    func image(withIdentifier identifier: String) -> Image? {
+        return nil
     }
     
     let result: DownloaderResult

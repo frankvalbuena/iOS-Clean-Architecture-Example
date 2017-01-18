@@ -11,6 +11,7 @@ import UIKit
 import AlamofireImage
 
 protocol ImageDownloaderService {
+    func image(withIdentifier identifier: String) -> Image?
     func download(_ urlRequest: URLRequest, completionBlock: @escaping (UIImage?, Error?) -> Void)
 }
 
@@ -24,6 +25,20 @@ struct AlamoFireImageDownloader: ImageDownloaderService {
         var defaultInstance = AlamoFireImageDownloader()
         defaultInstance.downloader = ImageDownloader()
         return defaultInstance
+    }
+    
+    static func defaultDownloaderWithCache() -> AlamoFireImageDownloader {
+        var defaultInstance = AlamoFireImageDownloader()
+        let imageDownloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(),
+                                              downloadPrioritization: .fifo,
+                                              maximumActiveDownloads: 10,
+                                              imageCache: AutoPurgingImageCache())
+        defaultInstance.downloader = imageDownloader
+        return defaultInstance
+    }
+    
+    func image(withIdentifier identifier: String) -> Image? {
+        return downloader.imageCache?.image(withIdentifier: identifier)
     }
     
     func download(_ urlRequest: URLRequest, completionBlock: @escaping (UIImage?, Error?) -> Void) {

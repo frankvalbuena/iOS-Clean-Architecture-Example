@@ -36,7 +36,8 @@ final class AppDetailsViewModel {
         
         if let bannerURL = details.bannerURL {
             imageDownloader.download(URLRequest(url: bannerURL)) {
-                 [weak self] imageDownloaded, error in
+                [weak self] imageDownloaded, error in
+                
                 if let image = imageDownloaded {
                     self?.banner = image
                 }

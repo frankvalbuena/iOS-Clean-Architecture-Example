@@ -63,14 +63,17 @@ struct ViewModelFactory: ViewModelFactoryProtocol {
         } else if type == AppListViewModel.self {
             syncApps(withLocator: locator)
             return AppListViewModel(locator: locator) as? T
-        } else if type == AppDetailsViewModel.self {
+        } else if type == AppCategoriesViewModel.self {
+            syncApps(withLocator: locator)
+            return AppCategoriesViewModel(locator: locator) as? T
+        } else if type == AppThumbnailViewModel.self {
+            return AppThumbnailViewModel(thumbnail: demoAppDTO(),
+                                         imageDownloaderService: MockImageDownloader(result: imageDownloaderResponse)) as? T
+        } else {
             syncApps(withLocator: locator)
             return AppDetailsViewModel(appID: appId,
                                        locator: locator,
                                        imageDownloader: MockImageDownloader(result: imageDownloaderResponse)) as? T
-        } else {
-            syncApps(withLocator: locator)
-            return AppCategoriesViewModel(locator: locator) as? T
         }
     }
     
@@ -80,5 +83,11 @@ private extension ViewModelFactory {
     static func syncApps(withLocator locator: UseCaseLocator) {
         let syncImplementator = locator.getUseCase(ofType: SyncAppData.self)
         syncImplementator?.sync({ (result) in})
+    }
+    
+    static func demoAppDTO () -> AppThumbnailDTO {
+        return AppThumbnailDTO(appstoreID: demoApp.appstoreID,
+                                              name: demoApp.shortName,
+                                              iconURL: demoApp.iconURL)
     }
 }
