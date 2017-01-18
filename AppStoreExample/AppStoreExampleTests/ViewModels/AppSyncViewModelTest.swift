@@ -29,14 +29,14 @@ class AppSyncViewModelTest: XCTestCase {
     }
     
     func testShouldFinishWithInternetConnectionError() {
-        syncVM = ViewModelFactory.createViewModel(ofType: AppSyncViewModel.self, response: .notConnectedToInternet)
+        syncVM = ViewModelFactory.createViewModel(ofType: AppSyncViewModel.self, appDownloaderResponse: .notConnectedToInternet)
         syncVM.startSync()
         let message = AppSyncViewModel.State.ErrorMessage.internetConnection.rawValue
         XCTAssert(syncVM.appSyncState == .finish(errorMessage: message))
     }
     
     func testShouldFinishWithFailure() {
-        syncVM = ViewModelFactory.createViewModel(ofType: AppSyncViewModel.self, response: .failure)
+        syncVM = ViewModelFactory.createViewModel(ofType: AppSyncViewModel.self, appDownloaderResponse: .failure)
         syncVM.startSync()
         let message = AppSyncViewModel.State.ErrorMessage.failure.rawValue
         XCTAssert(syncVM.appSyncState == .finish(errorMessage: message))

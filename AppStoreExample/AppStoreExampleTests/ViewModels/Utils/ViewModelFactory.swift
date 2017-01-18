@@ -11,15 +11,19 @@ import Foundation
 
 protocol ViewModelFactoryProtocol {
     static func createViewModel<T>(ofType: T.Type,
-                                response: AppStoreResponse) -> T?
+                                appId: String,
+                                imageDownloaderResponse: MockImageDownloader.DownloaderResult,
+                                appDownloaderResponse: AppStoreResponse) -> T?
 }
 
 struct ViewModelFactory: ViewModelFactoryProtocol {
     
+    static let sportID = "123456"
     static let sportCategory = "Sport Apps"
+    static let mockID = "1234567"
     static let mockCategory = "Mock Apps"
     
-    static let demoApp = RawAppData(appstoreID: "123456",
+    static let demoApp = RawAppData(appstoreID: ViewModelFactory.mockID,
                           shortName: "Short Name",
                           detailName: "Complete Name",
                           artist: "Francisco Valbuena",
@@ -31,7 +35,7 @@ struct ViewModelFactory: ViewModelFactoryProtocol {
                           iconURL: URL(string: "http://mock.com/mockIcon.png"),
                           rank: 0)
     
-    static let demoApp2 = RawAppData(appstoreID: "1234567",
+    static let demoApp2 = RawAppData(appstoreID: ViewModelFactory.sportID,
     shortName: "Short Name 2",
     detailName: "Complete Name 2",
     artist: "El tigre Falcao",
@@ -43,9 +47,14 @@ struct ViewModelFactory: ViewModelFactoryProtocol {
     iconURL: URL(string: "http://mock.com/mockIcon.png"),
     rank: 1)
     
+    private init() {}
+    
     static func createViewModel<T>(ofType type: T.Type,
-                                    response: AppStoreResponse = .success(apps:[ViewModelFactory.demoApp])) -> T? {
-        let service = MockAppStoreService(mockResponse: response)
+                                    appId: String = ViewModelFactory.mockID,
+                                    imageDownloaderResponse: MockImageDownloader.DownloaderResult = .sucess,
+                                    appDownloaderResponse: AppStoreResponse = .success(apps:[ViewModelFactory.demoApp])) -> T? {
+        
+        let service = MockAppStoreService(mockResponse: appDownloaderResponse)
         let repository = MockAppsRepository()
         let locator = UseCaseLocator(repository: repository, service: service)
         
@@ -54,6 +63,11 @@ struct ViewModelFactory: ViewModelFactoryProtocol {
         } else if type == AppListViewModel.self {
             syncApps(withLocator: locator)
             return AppListViewModel(locator: locator) as? T
+        } else if type == AppDetailsViewModel.self {
+            syncApps(withLocator: locator)
+            return AppDetailsViewModel(appID: appId,
+                                       locator: locator,
+                                       imageDownloader: MockImageDownloader(result: imageDownloaderResponse)) as? T
         } else {
             syncApps(withLocator: locator)
             return AppCategoriesViewModel(locator: locator) as? T

@@ -6,7 +6,6 @@
 //  Copyright © 2017 Francisco Valbuena. All rights reserved.
 //
 
-import AlamofireImage
 import Foundation
 import UIKit
 
@@ -17,9 +16,10 @@ final class AppDetailsViewModel {
     var summary: String
     let additionalInformation: [(type: String, value: String)]
     
-    private let imageDownloader = ImageDownloader()
+    private let imageDownloader: ImageDownloaderService
     
-    init(appID: String, locator: UseCaseLocatorProtocol) {
+    init(appID: String, locator: UseCaseLocatorProtocol, imageDownloader: ImageDownloaderService = AlamoFireImageDownloader.defaultDownloader()) {
+        self.imageDownloader = imageDownloader
         guard let details = locator.getUseCase(ofType: GetAppDetails.self)?.getDetails(appstoreId: appID) else {
             self.name = ""
             self.summary = ""
@@ -35,11 +35,12 @@ final class AppDetailsViewModel {
                                       (type: "Rights:", value: details.rights)]
         
         if let bannerURL = details.bannerURL {
-            imageDownloader.download(URLRequest(url: bannerURL)) { [weak self] response in
-                if let image = response.result.value {
+            imageDownloader.download(URLRequest(url: bannerURL)) {
+                 [weak self] imageDownloaded, error in
+                if let image = imageDownloaded {
                     self?.banner = image
-                    self?.onBannerLoaded?()
                 }
+                self?.onBannerLoaded?()
             }
         }
     }

@@ -29,46 +29,46 @@ class AppListViewModelTest: XCTestCase {
     }
     
     func testShowWarnigMessageForInternetConectionError() {
-        let response: AppStoreResponse = .notConnectedToInternet
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self,
+                                                     appDownloaderResponse: .notConnectedToInternet)
         XCTAssert(appListVM.warningMessage == "Not connected to internet, data can be out of date")
     }
     
     func testShowWarningMessageForFailureError() {
-        let response: AppStoreResponse = .failure
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self,
+                                                     appDownloaderResponse: .failure)
         XCTAssert(appListVM.warningMessage == "An error occurred, data can be out of date")
     }
     
     func testShouldNotUpdateThumbnails() {
-        let response: AppStoreResponse = .failure
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self,
+                                                     appDownloaderResponse: .failure)
         XCTAssert(appListVM.thumbnails.count == 0)
     }
     
     func testShouldUpdateThumbnails() {
         let response: AppStoreResponse = .success(apps: [ViewModelFactory.demoApp, ViewModelFactory.demoApp2])
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, appDownloaderResponse: response)
         XCTAssert(appListVM.thumbnails.count == 2)
     }
     
     func testNotShouldUpdateSportCategory() {
         let response: AppStoreResponse = .success(apps: [ViewModelFactory.demoApp, ViewModelFactory.demoApp2])
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, appDownloaderResponse: response)
         appListVM.selectedCategory = "Fake category"
         XCTAssert(appListVM.thumbnails.count == 0)
     }
     
     func testShouldUpdateMockCategory() {
         let response: AppStoreResponse = .success(apps: [ViewModelFactory.demoApp, ViewModelFactory.demoApp2])
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, appDownloaderResponse: response)
         appListVM.selectedCategory = ViewModelFactory.mockCategory
         XCTAssert(appListVM.thumbnails.count == 1)
     }
     
     func testShouldUpdateSportCategory() {
         let response: AppStoreResponse = .success(apps: [ViewModelFactory.demoApp, ViewModelFactory.demoApp2])
-        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, response: response)
+        appListVM = ViewModelFactory.createViewModel(ofType: AppListViewModel.self, appDownloaderResponse: response)
         appListVM.selectedCategory = ViewModelFactory.sportCategory
         XCTAssert(appListVM.thumbnails.count == 1)
     }
