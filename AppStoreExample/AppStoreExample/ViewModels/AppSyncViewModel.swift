@@ -15,7 +15,7 @@ final class AppSyncViewModel {
         public enum ErrorMessage: String {
             case internetConnection = "Cannot connect to the AppStore, please try again later"
             case failure = "Please check your internet connection"
-            case unknow = "An known error has occurred"
+            case unknow = "An unknown error has occurred"
         }
         
         case idle

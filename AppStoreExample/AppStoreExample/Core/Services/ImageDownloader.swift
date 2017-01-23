@@ -15,9 +15,9 @@ protocol ImageDownloaderService {
     func download(_ urlRequest: URLRequest, completionBlock: @escaping (UIImage?, Error?) -> Void)
 }
 
-struct AlamoFireImageDownloader: ImageDownloaderService {
+struct AlamoFireImageDownloader {
     
-    private var downloader: ImageDownloader!
+    fileprivate var downloader: ImageDownloader!
     
     private init() { }
     
@@ -37,14 +37,19 @@ struct AlamoFireImageDownloader: ImageDownloaderService {
         return defaultInstance
     }
     
+}
+
+extension AlamoFireImageDownloader: ImageDownloaderService {
+
     func image(withIdentifier identifier: String) -> Image? {
         return downloader.imageCache?.image(withIdentifier: identifier)
     }
     
     func download(_ urlRequest: URLRequest, completionBlock: @escaping (UIImage?, Error?) -> Void) {
         downloader.download(urlRequest) {
-         response in
+            response in
             completionBlock(response.result.value, response.result.error)
         }
     }
+    
 }

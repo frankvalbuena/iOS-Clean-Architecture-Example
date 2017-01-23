@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 @testable import AppStoreExample
 
-struct MockImageDownloader: ImageDownloaderService {
+struct MockImageDownloader {
     
     typealias Image = UIImage
     
@@ -19,14 +19,17 @@ struct MockImageDownloader: ImageDownloaderService {
         case failure(errorMessage: String)
     }
     
-    func image(withIdentifier identifier: String) -> Image? {
-        return nil
-    }
-    
     let result: DownloaderResult
     
     init(result: DownloaderResult) {
         self.result = result
+    }
+    
+}
+
+extension MockImageDownloader: ImageDownloaderService {
+    func image(withIdentifier identifier: String) -> Image? {
+        return nil
     }
     
     func download(_ urlRequest: URLRequest, completionBlock: @escaping (UIImage?, Error?) -> Void) {
