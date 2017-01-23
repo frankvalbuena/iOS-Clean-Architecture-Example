@@ -10,6 +10,7 @@ import Foundation
 
 final class AppListViewModel {
     fileprivate let locator: UseCaseLocatorProtocol
+    fileprivate let imageDownloaderService: ImageDownloaderService = AlamoFireImageDownloader.defaultDownloaderWithCache()
     
     var selectedCategory: String? = nil {
         didSet { updateThumbnails() }
@@ -49,13 +50,14 @@ private extension AppListViewModel {
         guard let list = locator.getUseCase(ofType: ListApps.self) else {
             return
         }
+        unowned let unownedSelf = self
         if let selectedCategory = self.selectedCategory {
             thumbnails = AnyCollection(list.listApps(byCategory: selectedCategory).lazy.map {
-                AppThumbnailViewModel(thumbnail: $0)
+                AppThumbnailViewModel(thumbnail: $0, imageDownloaderService: unownedSelf.imageDownloaderService)
             })
         } else {
             thumbnails = AnyCollection(list.listAllApps().lazy.map {
-                AppThumbnailViewModel(thumbnail: $0)
+                AppThumbnailViewModel(thumbnail: $0, imageDownloaderService: unownedSelf.imageDownloaderService)
             })
         }
         onListDidChange?()

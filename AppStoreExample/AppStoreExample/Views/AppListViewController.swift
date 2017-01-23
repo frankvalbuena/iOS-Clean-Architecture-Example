@@ -113,9 +113,9 @@ extension AppListViewController: AppListViewDelegate {
     func configure(cell: AppListCell, atIndex index: Int) {
         let thumb = thumbnail(atIndex: index)
         
-        thumb.onDidLoad = { [weak self, weak thumb, weak cell] in
+        thumb.onDidLoad = { [weak self, weak cell] in
             if thumb == self?.thumbnail(atIndex: index) {
-                cell?.iconImageView?.image = thumb?.icon
+                cell?.iconImageView?.image = thumb.icon
                 (cell as? UIView)?.setNeedsLayout()
             }
         }

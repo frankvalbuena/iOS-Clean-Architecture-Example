@@ -13,22 +13,20 @@ import AlamofireImage
 
 final class AppThumbnailViewModel {
     fileprivate static let imageSize = CGSize(width: 50, height: 50)
-    fileprivate static let imageDownloader = ImageDownloader(configuration: ImageDownloader.defaultURLSessionConfiguration(),
-                                                         downloadPrioritization: .fifo,
-                                                         maximumActiveDownloads: 10,
-                                                         imageCache: AutoPurgingImageCache())
+    fileprivate let imageDownloader: ImageDownloaderService
     fileprivate var iconURL: URL? = nil
-    fileprivate lazy var placeholderIcon: UIImage? = self.buildPlaceholderImage()
+    fileprivate(set) lazy var placeholderIcon: UIImage? = self.buildPlaceholderImage()
     
     var appID: String
     var name: String
     var icon: UIImage? = nil
     var onDidLoad: (() -> Void)? = nil
     
-    init(thumbnail: AppThumbnailDTO) {
+    init(thumbnail: AppThumbnailDTO, imageDownloaderService: ImageDownloaderService) {
         name = thumbnail.name
         iconURL = thumbnail.iconURL
         appID = thumbnail.appstoreID
+        imageDownloader = imageDownloaderService
     }
     
     func loadData() {
@@ -36,16 +34,17 @@ final class AppThumbnailViewModel {
             icon = placeholderIcon
             return
         }
-        let downloader = AppThumbnailViewModel.imageDownloader
         
-        icon = downloader.imageCache?.image(withIdentifier: iconURL.absoluteString) ?? placeholderIcon
+        icon = imageDownloader.image(withIdentifier: iconURL.absoluteString) ?? placeholderIcon
         // Thubnails are short lived object so it's ok to not use weak self in this case,
         // To make sure we don't miss callbacks.
-        AppThumbnailViewModel.imageDownloader.download(URLRequest(url: iconURL)) { response in
-            if let image = response.result.value {
-                self.icon = image
-                self.onDidLoad?()
+        imageDownloader.download(URLRequest(url: iconURL)) {
+            [weak self] imageDownloaded, error in
+            
+            if let image = imageDownloaded {
+                self?.icon = image
             }
+            self?.onDidLoad?()
         }
     }
 }

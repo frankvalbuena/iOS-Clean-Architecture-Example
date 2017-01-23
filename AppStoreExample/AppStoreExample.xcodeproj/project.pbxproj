@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45487DD11E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DD01E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift */; };
+		45487DD41E2ED97C00E0248B /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DD31E2ED97C00E0248B /* ImageDownloader.swift */; };
+		45487DD81E2EE40B00E0248B /* MockImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DD71E2EE40B00E0248B /* MockImageDownloader.swift */; };
+		45487DDC1E2EE7F600E0248B /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDB1E2EE7F600E0248B /* ViewModelFactory.swift */; };
+		45487DDE1E2EE81D00E0248B /* AppDetailsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */; };
+		45487DE01E2F0E4000E0248B /* AppThumbnailViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */; };
 		47E82369792B40C3DAB1B5A3 /* Pods_AppStoreExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */; };
+		6C1D76A71E2D606B004B432C /* AppSyncViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */; };
+		6C1D76A91E2D6483004B432C /* AppListViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */; };
 		73160B1A1E1DA88800652C99 /* ListAppsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B191E1DA88800652C99 /* ListAppsImpl.swift */; };
 		73160B1C1E1DA99900652C99 /* ListCategoriesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */; };
 		73160B1E1E1DB9FD00652C99 /* ListAppsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */; };
@@ -69,7 +77,15 @@
 		29A76F955CCCEAD04F851A52 /* Pods-AppStoreExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExampleTests/Pods-AppStoreExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		2B3118DD56BC020EA4B1BF1D /* Pods-AppStoreExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.release.xcconfig"; sourceTree = "<group>"; };
 		3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45487DD01E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCategoriesViewModelTest.swift; path = ViewModels/AppCategoriesViewModelTest.swift; sourceTree = "<group>"; };
+		45487DD31E2ED97C00E0248B /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageDownloader.swift; path = Core/Services/ImageDownloader.swift; sourceTree = "<group>"; };
+		45487DD71E2EE40B00E0248B /* MockImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockImageDownloader.swift; path = MockObjects/MockImageDownloader.swift; sourceTree = "<group>"; };
+		45487DDB1E2EE7F600E0248B /* ViewModelFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewModelFactory.swift; path = ViewModels/Utils/ViewModelFactory.swift; sourceTree = "<group>"; };
+		45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDetailsViewModelTest.swift; path = ViewModels/AppDetailsViewModelTest.swift; sourceTree = "<group>"; };
+		45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppThumbnailViewModelTest.swift; path = ViewModels/AppThumbnailViewModelTest.swift; sourceTree = "<group>"; };
 		54FAB44973C9E42BB27491A3 /* Pods-AppStoreExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.debug.xcconfig"; sourceTree = "<group>"; };
+		6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSyncViewModelTest.swift; path = ViewModels/AppSyncViewModelTest.swift; sourceTree = "<group>"; };
+		6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppListViewModelTest.swift; path = ViewModels/AppListViewModelTest.swift; sourceTree = "<group>"; };
 		73160B191E1DA88800652C99 /* ListAppsImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsImpl.swift; path = Core/UseCases/Implementations/ListAppsImpl.swift; sourceTree = "<group>"; };
 		73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCategoriesImpl.swift; path = Core/UseCases/Implementations/ListCategoriesImpl.swift; sourceTree = "<group>"; };
 		73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsTest.swift; path = UseCases/ListAppsTest.swift; sourceTree = "<group>"; };
@@ -142,6 +158,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45487DD21E2EAF0900E0248B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				45487DDB1E2EE7F600E0248B /* ViewModelFactory.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		73236C101E1C334E00B0B9CC = {
 			isa = PBXGroup;
 			children = (
@@ -184,7 +208,7 @@
 				73603B921E1D43310016C6F2 /* MockObjects */,
 				73603B901E1D43050016C6F2 /* Services */,
 				73603B911E1D430E0016C6F2 /* UseCases */,
-				73603B931E1D43F20016C6F2 /* ViewModel */,
+				73603B931E1D43F20016C6F2 /* ViewModels */,
 			);
 			path = AppStoreExampleTests;
 			sourceTree = "<group>";
@@ -237,6 +261,7 @@
 				73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */,
 				73603B991E1D46780016C6F2 /* InMemoryAppsRepository.swift */,
 				731C9B2C1E1C6E9C00B3C5B9 /* ItunesWebService.swift */,
+				45487DD31E2ED97C00E0248B /* ImageDownloader.swift */,
 			);
 			name = Adapters;
 			sourceTree = "<group>";
@@ -331,15 +356,22 @@
 			children = (
 				73603B961E1D445E0016C6F2 /* MockAppStoreService.swift */,
 				73603B9D1E1D6BFC0016C6F2 /* MockAppsRepository.swift */,
+				45487DD71E2EE40B00E0248B /* MockImageDownloader.swift */,
 			);
 			name = MockObjects;
 			sourceTree = "<group>";
 		};
-		73603B931E1D43F20016C6F2 /* ViewModel */ = {
+		73603B931E1D43F20016C6F2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				45487DD21E2EAF0900E0248B /* Utils */,
+				6C1D76A61E2D606B004B432C /* AppSyncViewModelTest.swift */,
+				6C1D76A81E2D6483004B432C /* AppListViewModelTest.swift */,
+				45487DD01E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift */,
+				45487DDD1E2EE81D00E0248B /* AppDetailsViewModelTest.swift */,
+				45487DDF1E2F0E4000E0248B /* AppThumbnailViewModelTest.swift */,
 			);
-			name = ViewModel;
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		AA45BA4F16FCD40D95DEA6D8 /* Frameworks */ = {
@@ -577,6 +609,7 @@
 				731C9B2D1E1C6E9C00B3C5B9 /* ItunesWebService.swift in Sources */,
 				73236C4B1E1C3A5200B0B9CC /* UseCaseLocator.swift in Sources */,
 				73276F5C1E200E7200BC2B4F /* AppDetailsViewController.swift in Sources */,
+				45487DD41E2ED97C00E0248B /* ImageDownloader.swift in Sources */,
 				73236C451E1C387900B0B9CC /* AppsRepository.swift in Sources */,
 				735B47841E1DE5B000EB3D13 /* AppListViewModel.swift in Sources */,
 				73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */,
@@ -607,13 +640,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45487DD81E2EE40B00E0248B /* MockImageDownloader.swift in Sources */,
+				45487DE01E2F0E4000E0248B /* AppThumbnailViewModelTest.swift in Sources */,
+				45487DDC1E2EE7F600E0248B /* ViewModelFactory.swift in Sources */,
 				73603BA21E1D70E40016C6F2 /* AppsRepositoryTest.swift in Sources */,
 				735B477E1E1DD6C500EB3D13 /* GetAppDetailsTest.swift in Sources */,
 				73160B1E1E1DB9FD00652C99 /* ListAppsTest.swift in Sources */,
+				6C1D76A91E2D6483004B432C /* AppListViewModelTest.swift in Sources */,
 				73603B9C1E1D59F90016C6F2 /* SyncAppDataTest.swift in Sources */,
+				45487DDE1E2EE81D00E0248B /* AppDetailsViewModelTest.swift in Sources */,
 				73160B241E1DD28600652C99 /* ListCategoriesTest.swift in Sources */,
 				73603B951E1D44320016C6F2 /* ItunesWebServiceTest.swift in Sources */,
 				735B47801E1DE08100EB3D13 /* UseCaseLocatorTest.swift in Sources */,
+				45487DD11E2EA2AA00E0248B /* AppCategoriesViewModelTest.swift in Sources */,
+				6C1D76A71E2D606B004B432C /* AppSyncViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
