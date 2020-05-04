@@ -30,7 +30,7 @@ private extension AppCategoriesViewController {
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: type(of: self).cellId)
         self.clearsSelectionOnViewWillAppear = false
-        if let row = viewModel.categories.index(of: viewModel.selectedCategory ?? type(of: viewModel).allApps) {
+        if let row = viewModel.categories.firstIndex(of: viewModel.selectedCategory ?? type(of: viewModel).allApps) {
             self.tableView.selectRow(at: IndexPath(row: row, section: 0),
                                      animated: false,
                                      scrollPosition: .none)

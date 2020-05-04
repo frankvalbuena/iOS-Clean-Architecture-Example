@@ -1,39 +1,46 @@
 PODS:
-  - Alamofire (4.2.0)
-  - AlamofireImage (3.2.0):
-    - Alamofire (~> 4.1)
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
   - MagicalRecord (2.3.2):
     - MagicalRecord/Core (= 2.3.2)
   - MagicalRecord/Core (2.3.2)
-  - OHHTTPStubs (5.2.3):
-    - OHHTTPStubs/Default (= 5.2.3)
-  - OHHTTPStubs/Core (5.2.3)
-  - OHHTTPStubs/Default (5.2.3):
+  - OHHTTPStubs (9.0.0):
+    - OHHTTPStubs/Default (= 9.0.0)
+  - OHHTTPStubs/Core (9.0.0)
+  - OHHTTPStubs/Default (9.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.3):
+  - OHHTTPStubs/JSON (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.3):
+  - OHHTTPStubs/NSURLSession (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.3)
-  - OHHTTPStubs/Swift (5.2.3):
-    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (9.0.0)
+  - OHHTTPStubs/Swift (9.0.0):
+    - OHHTTPStubs/Default
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
-  - AlamofireImage (~> 3.1)
+  - Alamofire (~> 5.1)
+  - AlamofireImage (~> 4.1)
   - MagicalRecord
   - OHHTTPStubs
   - OHHTTPStubs/Swift
 
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AlamofireImage
+    - MagicalRecord
+    - OHHTTPStubs
+
 SPEC CHECKSUMS:
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
-  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
-  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
+  OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
 
-PODFILE CHECKSUM: db2f266efb04c0d0b7c319312558d42a0b23384b
+PODFILE CHECKSUM: b45bc9ebe7c0b80170bb213387862eda612dc104
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.9.1

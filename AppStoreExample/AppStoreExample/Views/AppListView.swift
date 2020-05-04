@@ -15,7 +15,7 @@ protocol AppListCell: class {
 }
 
 protocol AppListView: class {
-    weak var listDelegate: AppListViewDelegate? { get set }
+    var listDelegate: AppListViewDelegate? { get set }
     
     func cell(atIndex: Int) -> AppListCell?
     func reloadData(animated: Bool)

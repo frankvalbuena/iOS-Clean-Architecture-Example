@@ -13,10 +13,11 @@ class ItunesWebService: AppStoreService {
     static let endPoint = "https://itunes.apple.com/us/rss/topfreeapplications/"
     
     func retrieveTopFreeApps(count: Int, completion: @escaping (AppStoreResponse) -> Void) {
-        Alamofire.request(type(of: self).endPoint + "limit=\(count)/json").responseJSON
+        
+        AF.request(type(of: self).endPoint + "limit=\(count)/json").responseJSON
         { response in
             guard let urlResponse = response.response else {
-                if let error = response.result.error as? NSError, error.code == NSURLErrorNotConnectedToInternet {
+                if .notConnectedToInternet == (response.error?.underlyingError as? URLError)?.code {
                     completion(.notConnectedToInternet)
                 } else {
                     completion(.failure)
@@ -25,9 +26,10 @@ class ItunesWebService: AppStoreService {
             }
             
             switch urlResponse.statusCode {
-            case 200:
-                if let json = response.result.value as? NSDictionary,
-                   let apps = ItunesWebService.parse(response: json)
+            case 200...299:
+                if case .success(let json) = response.result,
+                    let jsonDictionary = json as? NSDictionary,
+                    let apps = ItunesWebService.parse(response: jsonDictionary)
                 {
                    completion(.success(apps: apps))
                 } else {

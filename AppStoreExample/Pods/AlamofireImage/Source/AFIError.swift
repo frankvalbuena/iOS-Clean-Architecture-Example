@@ -1,7 +1,7 @@
 //
 //  AFIError.swift
 //
-//  Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2015 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,6 +22,7 @@
 //  THE SOFTWARE.
 //
 
+import Alamofire
 import Foundation
 
 /// `AFIError` is the error type returned by AlamofireImage.
@@ -31,6 +32,7 @@ import Foundation
 public enum AFIError: Error {
     case requestCancelled
     case imageSerializationFailed
+    case alamofireError(AFError)
 }
 
 // MARK: - Error Booleans
@@ -47,6 +49,11 @@ extension AFIError {
         if case .imageSerializationFailed = self { return true }
         return false
     }
+
+    public var isAlamofireError: Bool {
+        if case .alamofireError = self { return true }
+        return false
+    }
 }
 
 // MARK: - Error Descriptions
@@ -58,6 +65,8 @@ extension AFIError: LocalizedError {
             return "The request was explicitly cancelled."
         case .imageSerializationFailed:
             return "Response data could not be serialized into an image."
+        case let .alamofireError(error):
+            return "Request failed due to an underlying Alamofire error: \(error.localizedDescription)"
         }
     }
 }

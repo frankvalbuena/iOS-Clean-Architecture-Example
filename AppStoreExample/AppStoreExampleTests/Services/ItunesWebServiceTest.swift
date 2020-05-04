@@ -15,9 +15,9 @@ class ItunesWebServiceTest: XCTestCase {
     
     func testNotInternetConnection() {
         stub(condition: isHost(hostToStub)) { _ in
-            return OHHTTPStubsResponse(error: NSError(domain: NSURLErrorDomain,
-                                                      code: NSURLErrorNotConnectedToInternet,
-                                                      userInfo: nil))
+            return HTTPStubsResponse(error: NSError(domain: NSURLErrorDomain,
+                                                    code: NSURLErrorNotConnectedToInternet,
+                                                    userInfo: nil))
         }
         let waitingForService = expectation(description: "iTunes Service Call")
         
@@ -34,9 +34,9 @@ class ItunesWebServiceTest: XCTestCase {
     
     func testWrongJSON() {
         stub(condition: isHost(hostToStub)) { _ in
-            return OHHTTPStubsResponse(jsonObject: ["Wrong": "Data"],
-                                       statusCode: 200,
-                                       headers: nil)
+            return HTTPStubsResponse(jsonObject: ["Wrong": "Data"],
+                                     statusCode: 200,
+                                     headers: nil)
         }
         let waitingForService = expectation(description: "iTunes Service Call")
         
@@ -76,9 +76,9 @@ class ItunesWebServiceTest: XCTestCase {
                 "id": ["attributes": ["im:id": mockAppStoreId]],
                 "summary": ["label": mockSummary]
             ]
-            return OHHTTPStubsResponse(jsonObject: ["feed": ["entry": [mockAppData]]],
-                                       statusCode: 200,
-                                       headers: nil)
+            return HTTPStubsResponse(jsonObject: ["feed": ["entry": [mockAppData]]],
+                                     statusCode: 200,
+                                     headers: nil)
         }
         
         let waitingForService = expectation(description: "iTunes Service Call")

@@ -53,7 +53,7 @@ class AppDetailsViewController: UITableViewController {
         appNameLabel?.text = viewModel.name
         summaryLabel?.text = viewModel.summary
         informationTableView?.dataSource = infoDataSource
-        informationTableView?.rowHeight = UITableViewAutomaticDimension
+        informationTableView?.rowHeight = UITableView.automaticDimension
         bannerImageView?.layer.cornerRadius = 10.0
         bannerImageView?.layer.masksToBounds = true
         bannerImageView?.image = viewModel.banner
@@ -68,11 +68,11 @@ class AppDetailsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 }
 

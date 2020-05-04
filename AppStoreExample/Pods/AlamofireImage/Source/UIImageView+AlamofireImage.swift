@@ -1,7 +1,7 @@
 //
 //  UIImageView+AlamofireImage.swift
 //
-//  Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2015 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,9 @@ import Foundation
 
 import UIKit
 
+public typealias AnimationOptions = UIView.AnimationOptions
+
 extension UIImageView {
-
-    // MARK: - ImageTransition
-
     /// Used to wrap all `UIView` animation transition options alongside a duration.
     public enum ImageTransition {
         case noTransition
@@ -43,42 +42,40 @@ extension UIImageView {
         case flipFromLeft(TimeInterval)
         case flipFromRight(TimeInterval)
         case flipFromTop(TimeInterval)
-        case custom(
-            duration: TimeInterval,
-            animationOptions: UIViewAnimationOptions,
-            animations: (UIImageView, Image) -> Void,
-            completion: ((Bool) -> Void)?
-        )
+        case custom(duration: TimeInterval,
+                    animationOptions: AnimationOptions,
+                    animations: (UIImageView, Image) -> Void,
+                    completion: ((Bool) -> Void)?)
 
         /// The duration of the image transition in seconds.
         public var duration: TimeInterval {
             switch self {
             case .noTransition:
                 return 0.0
-            case .crossDissolve(let duration):
+            case let .crossDissolve(duration):
                 return duration
-            case .curlDown(let duration):
+            case let .curlDown(duration):
                 return duration
-            case .curlUp(let duration):
+            case let .curlUp(duration):
                 return duration
-            case .flipFromBottom(let duration):
+            case let .flipFromBottom(duration):
                 return duration
-            case .flipFromLeft(let duration):
+            case let .flipFromLeft(duration):
                 return duration
-            case .flipFromRight(let duration):
+            case let .flipFromRight(duration):
                 return duration
-            case .flipFromTop(let duration):
+            case let .flipFromTop(duration):
                 return duration
-            case .custom(let duration, _, _, _):
+            case let .custom(duration, _, _, _):
                 return duration
             }
         }
 
         /// The animation options of the image transition.
-        public var animationOptions: UIViewAnimationOptions {
+        public var animationOptions: AnimationOptions {
             switch self {
             case .noTransition:
-                return UIViewAnimationOptions()
+                return []
             case .crossDissolve:
                 return .transitionCrossDissolve
             case .curlDown:
@@ -93,15 +90,15 @@ extension UIImageView {
                 return .transitionFlipFromRight
             case .flipFromTop:
                 return .transitionFlipFromTop
-            case .custom(_, let animationOptions, _, _):
+            case let .custom(_, animationOptions, _, _):
                 return animationOptions
             }
         }
 
         /// The animation options of the image transition.
-        public var animations: ((UIImageView, Image) -> Void) {
+        public var animations: (UIImageView, Image) -> Void {
             switch self {
-            case .custom(_, _, let animations, _):
+            case let .custom(_, _, animations, _):
                 return animations
             default:
                 return { $0.image = $1 }
@@ -111,59 +108,56 @@ extension UIImageView {
         /// The completion closure associated with the image transition.
         public var completion: ((Bool) -> Void)? {
             switch self {
-            case .custom(_, _, _, let completion):
+            case let .custom(_, _, _, completion):
                 return completion
             default:
                 return nil
             }
         }
     }
+}
 
-    // MARK: - Private - AssociatedKeys
+// MARK: -
 
-    private struct AssociatedKey {
-        static var imageDownloader = "af_UIImageView.ImageDownloader"
-        static var sharedImageDownloader = "af_UIImageView.SharedImageDownloader"
-        static var activeRequestReceipt = "af_UIImageView.ActiveRequestReceipt"
-    }
-
-    // MARK: - Associated Properties
+extension UIImageView: AlamofireExtended {}
+extension AlamofireExtension where ExtendedType: UIImageView {
+    // MARK: - Properties
 
     /// The instance image downloader used to download all images. If this property is `nil`, the `UIImageView` will
-    /// fallback on the `af_sharedImageDownloader` for all downloads. The most common use case for needing to use a
-    /// custom instance image downloader is when images are behind different basic auth credentials.
-    public var af_imageDownloader: ImageDownloader? {
+    /// fallback on the `sharedImageDownloader` for all downloads. The most common use case for needing to use a custom
+    /// instance image downloader is when images are behind different basic auth credentials.
+    public var imageDownloader: ImageDownloader? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.imageDownloader) as? ImageDownloader
+            objc_getAssociatedObject(type, &AssociatedKeys.imageDownloader) as? ImageDownloader
         }
-        set(downloader) {
-            objc_setAssociatedObject(self, &AssociatedKey.imageDownloader, downloader, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        nonmutating set(downloader) {
+            objc_setAssociatedObject(type, &AssociatedKeys.imageDownloader, downloader, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
     /// The shared image downloader used to download all images. By default, this is the default `ImageDownloader`
     /// instance backed with an `AutoPurgingImageCache` which automatically evicts images from the cache when the memory
     /// capacity is reached or memory warning notifications occur. The shared image downloader is only used if the
-    /// `af_imageDownloader` is `nil`.
-    public class var af_sharedImageDownloader: ImageDownloader {
+    /// `imageDownloader` is `nil`.
+    public static var sharedImageDownloader: ImageDownloader {
         get {
-            if let downloader = objc_getAssociatedObject(self, &AssociatedKey.sharedImageDownloader) as? ImageDownloader {
+            if let downloader = objc_getAssociatedObject(UIImageView.self, &AssociatedKeys.sharedImageDownloader) as? ImageDownloader {
                 return downloader
             } else {
                 return ImageDownloader.default
             }
         }
         set {
-            objc_setAssociatedObject(self, &AssociatedKey.sharedImageDownloader, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(UIImageView.self, &AssociatedKeys.sharedImageDownloader, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
-    var af_activeRequestReceipt: RequestReceipt? {
+    var activeRequestReceipt: RequestReceipt? {
         get {
-            return objc_getAssociatedObject(self, &AssociatedKey.activeRequestReceipt) as? RequestReceipt
+            objc_getAssociatedObject(type, &AssociatedKeys.activeRequestReceipt) as? RequestReceipt
         }
-        set {
-            objc_setAssociatedObject(self, &AssociatedKey.activeRequestReceipt, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        nonmutating set {
+            objc_setAssociatedObject(type, &AssociatedKeys.activeRequestReceipt, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 
@@ -172,7 +166,7 @@ extension UIImageView {
     /// Asynchronously downloads an image from the specified URL, applies the specified image filter to the downloaded
     /// image and sets it once finished while executing the image transition.
     ///
-    /// If the image is cached locally, the image is set immediately. Otherwise the specified placehoder image will be
+    /// If the image is cached locally, the image is set immediately. Otherwise the specified placeholder image will be
     /// set immediately, and then the remote image will be set once the image request is finished.
     ///
     /// The `completion` closure is called after the image download and filtering are complete, but before the start of
@@ -182,9 +176,14 @@ extension UIImageView {
     /// the image transition is finished.
     ///
     /// - parameter url:                        The URL used for the image request.
+    /// - parameter cacheKey:                   An optional key used to identify the image in the cache. Defaults
+    ///                                         to `nil`.
     /// - parameter placeholderImage:           The image to be set initially until the image request finished. If
     ///                                         `nil`, the image view will not change its image until the image
     ///                                         request finishes. Defaults to `nil`.
+    /// - parameter serializer:                 Image response serializer used to convert the image data to `UIImage`.
+    ///                                         Defaults to `nil` which will fall back to the
+    ///                                         instance `imageResponseSerializer` set on the `ImageDownloader`.
     /// - parameter filter:                     The image filter applied to the image after the image request is
     ///                                         finished. Defaults to `nil`.
     /// - parameter progress:                   The closure to be executed periodically during the lifecycle of the
@@ -200,32 +199,32 @@ extension UIImageView {
     ///                                         the response from the server and the result containing either the
     ///                                         image or the error that occurred. If the image was returned from the
     ///                                         image cache, the response will be `nil`. Defaults to `nil`.
-    public func af_setImage(
-        withURL url: URL,
-        placeholderImage: UIImage? = nil,
-        filter: ImageFilter? = nil,
-        progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: DispatchQueue = DispatchQueue.main,
-        imageTransition: ImageTransition = .noTransition,
-        runImageTransitionIfCached: Bool = false,
-        completion: ((DataResponse<UIImage>) -> Void)? = nil)
-    {
-        af_setImage(
-            withURLRequest: urlRequest(with: url),
-            placeholderImage: placeholderImage,
-            filter: filter,
-            progress: progress,
-            progressQueue: progressQueue,
-            imageTransition: imageTransition,
-            runImageTransitionIfCached: runImageTransitionIfCached,
-            completion: completion
-        )
+    public func setImage(withURL url: URL,
+                         cacheKey: String? = nil,
+                         placeholderImage: UIImage? = nil,
+                         serializer: ImageResponseSerializer? = nil,
+                         filter: ImageFilter? = nil,
+                         progress: ImageDownloader.ProgressHandler? = nil,
+                         progressQueue: DispatchQueue = DispatchQueue.main,
+                         imageTransition: UIImageView.ImageTransition = .noTransition,
+                         runImageTransitionIfCached: Bool = false,
+                         completion: ((AFIDataResponse<UIImage>) -> Void)? = nil) {
+        setImage(withURLRequest: urlRequest(with: url),
+                 cacheKey: cacheKey,
+                 placeholderImage: placeholderImage,
+                 serializer: serializer,
+                 filter: filter,
+                 progress: progress,
+                 progressQueue: progressQueue,
+                 imageTransition: imageTransition,
+                 runImageTransitionIfCached: runImageTransitionIfCached,
+                 completion: completion)
     }
 
     /// Asynchronously downloads an image from the specified URL Request, applies the specified image filter to the downloaded
     /// image and sets it once finished while executing the image transition.
     ///
-    /// If the image is cached locally, the image is set immediately. Otherwise the specified placehoder image will be
+    /// If the image is cached locally, the image is set immediately. Otherwise the specified placeholder image will be
     /// set immediately, and then the remote image will be set once the image request is finished.
     ///
     /// The `completion` closure is called after the image download and filtering are complete, but before the start of
@@ -235,9 +234,14 @@ extension UIImageView {
     /// the image transition is finished.
     ///
     /// - parameter urlRequest:                 The URL request.
+    /// - parameter cacheKey:                   An optional key used to identify the image in the cache. Defaults
+    ///                                         to `nil`.
     /// - parameter placeholderImage:           The image to be set initially until the image request finished. If
     ///                                         `nil`, the image view will not change its image until the image
     ///                                         request finishes. Defaults to `nil`.
+    /// - parameter serializer:                 Image response serializer used to convert the image data to `UIImage`.
+    ///                                         Defaults to `nil` which will fall back to the
+    ///                                         instance `imageResponseSerializer` set on the `ImageDownloader`.
     /// - parameter filter:                     The image filter applied to the image after the image request is
     ///                                         finished. Defaults to `nil`.
     /// - parameter progress:                   The closure to be executed periodically during the lifecycle of the
@@ -253,99 +257,124 @@ extension UIImageView {
     ///                                         the response from the server and the result containing either the
     ///                                         image or the error that occurred. If the image was returned from the
     ///                                         image cache, the response will be `nil`. Defaults to `nil`.
-    public func af_setImage(
-        withURLRequest urlRequest: URLRequestConvertible,
-        placeholderImage: UIImage? = nil,
-        filter: ImageFilter? = nil,
-        progress: ImageDownloader.ProgressHandler? = nil,
-        progressQueue: DispatchQueue = DispatchQueue.main,
-        imageTransition: ImageTransition = .noTransition,
-        runImageTransitionIfCached: Bool = false,
-        completion: ((DataResponse<UIImage>) -> Void)? = nil)
-    {
+    public func setImage(withURLRequest urlRequest: URLRequestConvertible,
+                         cacheKey: String? = nil,
+                         placeholderImage: UIImage? = nil,
+                         serializer: ImageResponseSerializer? = nil,
+                         filter: ImageFilter? = nil,
+                         progress: ImageDownloader.ProgressHandler? = nil,
+                         progressQueue: DispatchQueue = DispatchQueue.main,
+                         imageTransition: UIImageView.ImageTransition = .noTransition,
+                         runImageTransitionIfCached: Bool = false,
+                         completion: ((AFIDataResponse<UIImage>) -> Void)? = nil) {
         guard !isURLRequestURLEqualToActiveRequestURL(urlRequest) else {
-            let error = AFIError.requestCancelled
-            let response = DataResponse<UIImage>(request: nil, response: nil, data: nil, result: .failure(error))
+            let response = AFIDataResponse<UIImage>(request: nil,
+                                                    response: nil,
+                                                    data: nil,
+                                                    metrics: nil,
+                                                    serializationDuration: 0.0,
+                                                    result: .failure(AFIError.requestCancelled))
 
             completion?(response)
 
             return
         }
 
-        af_cancelImageRequest()
+        cancelImageRequest()
 
-        let imageDownloader = af_imageDownloader ?? UIImageView.af_sharedImageDownloader
+        let imageDownloader = self.imageDownloader ?? UIImageView.af.sharedImageDownloader
         let imageCache = imageDownloader.imageCache
 
         // Use the image from the image cache if it exists
-        if
-            let request = urlRequest.urlRequest,
-            let image = imageCache?.image(for: request, withIdentifier: filter?.identifier)
-        {
-            let response = DataResponse<UIImage>(request: request, response: nil, data: nil, result: .success(image))
+        if let request = urlRequest.urlRequest {
+            let cachedImage: Image?
 
-            if runImageTransitionIfCached {
-                let tinyDelay = DispatchTime.now() + Double(Int64(0.001 * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-
-                // Need to let the runloop cycle for the placeholder image to take affect
-                DispatchQueue.main.asyncAfter(deadline: tinyDelay) {
-                    self.run(imageTransition, with: image)
-                    completion?(response)
-                }
+            if let cacheKey = cacheKey {
+                cachedImage = imageCache?.image(withIdentifier: cacheKey)
             } else {
-                self.image = image
-                completion?(response)
+                cachedImage = imageCache?.image(for: request, withIdentifier: filter?.identifier)
             }
 
-            return
+            if let image = cachedImage {
+                let response = AFIDataResponse<UIImage>(request: request,
+                                                        response: nil,
+                                                        data: nil,
+                                                        metrics: nil,
+                                                        serializationDuration: 0.0,
+                                                        result: .success(image))
+
+                if runImageTransitionIfCached {
+                    // It's important to display the placeholder image again otherwise you have some odd disparity
+                    // between the request loading from the cache and those that download. It's important to keep
+                    // the same behavior between both, otherwise the user can actually see the difference.
+                    if let placeholderImage = placeholderImage { type.image = placeholderImage }
+
+                    // Need to let the runloop cycle for the placeholder image to take affect
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
+                        // Added this additional check to ensure another request didn't get in during the delay
+                        guard self.activeRequestReceipt == nil else { return }
+
+                        self.run(imageTransition, with: image)
+                        completion?(response)
+                    }
+                } else {
+                    type.image = image
+                    completion?(response)
+                }
+
+                return
+            }
         }
 
         // Set the placeholder since we're going to have to download
-        if let placeholderImage = placeholderImage { self.image = placeholderImage }
+        if let placeholderImage = placeholderImage { type.image = placeholderImage }
 
         // Generate a unique download id to check whether the active request has changed while downloading
         let downloadID = UUID().uuidString
 
+        // Weakify the image view to allow it to go out-of-memory while download is running if deallocated
+        weak var imageView = type
+
         // Download the image, then run the image transition or completion handler
-        let requestReceipt = imageDownloader.download(
-            urlRequest,
-            receiptID: downloadID,
-            filter: filter,
-            progress: progress,
-            progressQueue: progressQueue,
-            completion: { [weak self] response in
-                guard
-                    let strongSelf = self,
-                    strongSelf.isURLRequestURLEqualToActiveRequestURL(response.request) &&
-                    strongSelf.af_activeRequestReceipt?.receiptID == downloadID
-                else {
-                    completion?(response)
-                    return
-                }
+        let requestReceipt = imageDownloader.download(urlRequest,
+                                                      cacheKey: cacheKey,
+                                                      receiptID: downloadID,
+                                                      serializer: serializer,
+                                                      filter: filter,
+                                                      progress: progress,
+                                                      progressQueue: progressQueue,
+                                                      completion: { response in
+                                                          guard
+                                                              let strongSelf = imageView?.af,
+                                                              strongSelf.isURLRequestURLEqualToActiveRequestURL(response.request) &&
+                                                              strongSelf.activeRequestReceipt?.receiptID == downloadID
+                                                          else {
+                                                              completion?(response)
+                                                              return
+                                                          }
 
-                if let image = response.result.value {
-                    strongSelf.run(imageTransition, with: image)
-                }
+                                                          if case let .success(image) = response.result {
+                                                              strongSelf.run(imageTransition, with: image)
+                                                          }
 
-                strongSelf.af_activeRequestReceipt = nil
+                                                          strongSelf.activeRequestReceipt = nil
 
-                completion?(response)
-            }
-        )
+                                                          completion?(response)
+            })
 
-        af_activeRequestReceipt = requestReceipt
+        activeRequestReceipt = requestReceipt
     }
 
     // MARK: - Image Download Cancellation
 
     /// Cancels the active download request, if one exists.
-    public func af_cancelImageRequest() {
-        guard let activeRequestReceipt = af_activeRequestReceipt else { return }
+    public func cancelImageRequest() {
+        guard let activeRequestReceipt = activeRequestReceipt else { return }
 
-        let imageDownloader = af_imageDownloader ?? UIImageView.af_sharedImageDownloader
+        let imageDownloader = self.imageDownloader ?? UIImageView.af.sharedImageDownloader
         imageDownloader.cancelRequest(with: activeRequestReceipt)
 
-        af_activeRequestReceipt = nil
+        self.activeRequestReceipt = nil
     }
 
     // MARK: - Image Transition
@@ -354,14 +383,14 @@ extension UIImageView {
     ///
     /// - parameter imageTransition: The image transition to ran on the image view.
     /// - parameter image:           The image to use for the image transition.
-    public func run(_ imageTransition: ImageTransition, with image: Image) {
-        UIView.transition(
-            with: self,
-            duration: imageTransition.duration,
-            options: imageTransition.animationOptions,
-            animations: { imageTransition.animations(self, image) },
-            completion: imageTransition.completion
-        )
+    public func run(_ imageTransition: UIImageView.ImageTransition, with image: Image) {
+        let imageView = type
+
+        UIView.transition(with: type,
+                          duration: imageTransition.duration,
+                          options: imageTransition.animationOptions,
+                          animations: { imageTransition.animations(imageView, image) },
+                          completion: imageTransition.completion)
     }
 
     // MARK: - Private - URL Request Helper Methods
@@ -369,7 +398,7 @@ extension UIImageView {
     private func urlRequest(with url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
 
-        for mimeType in DataRequest.acceptableImageContentTypes {
+        for mimeType in ImageResponseSerializer.acceptableImageContentTypes {
             urlRequest.addValue(mimeType, forHTTPHeaderField: "Accept")
         }
 
@@ -378,15 +407,94 @@ extension UIImageView {
 
     private func isURLRequestURLEqualToActiveRequestURL(_ urlRequest: URLRequestConvertible?) -> Bool {
         if
-            let currentRequestURL = af_activeRequestReceipt?.request.task?.originalRequest?.url,
+            let currentRequestURL = activeRequestReceipt?.request.task?.originalRequest?.url,
             let requestURL = urlRequest?.urlRequest?.url,
-            currentRequestURL == requestURL
-        {
+            currentRequestURL == requestURL {
             return true
         }
 
         return false
     }
+}
+
+// MARK: - Deprecated
+
+extension UIImageView {
+    @available(*, deprecated, message: "Replaced by `imageView.af.imageDownloader`")
+    public var af_imageDownloader: ImageDownloader? {
+        get { af.imageDownloader }
+        set { af.imageDownloader = newValue }
+    }
+
+    @available(*, deprecated, message: "Replaced by `imageView.af.sharedImageDownloader`")
+    public class var af_sharedImageDownloader: ImageDownloader {
+        get { af.sharedImageDownloader }
+        set { af.sharedImageDownloader = newValue }
+    }
+
+    @available(*, deprecated, message: "Replaced by `imageView.af.setImage(withURL: ...)`")
+    public func af_setImage(withURL url: URL,
+                            cacheKey: String? = nil,
+                            placeholderImage: UIImage? = nil,
+                            serializer: ImageResponseSerializer? = nil,
+                            filter: ImageFilter? = nil,
+                            progress: ImageDownloader.ProgressHandler? = nil,
+                            progressQueue: DispatchQueue = DispatchQueue.main,
+                            imageTransition: ImageTransition = .noTransition,
+                            runImageTransitionIfCached: Bool = false,
+                            completion: ((AFIDataResponse<UIImage>) -> Void)? = nil) {
+        af.setImage(withURL: url,
+                    cacheKey: cacheKey,
+                    placeholderImage: placeholderImage,
+                    serializer: serializer,
+                    filter: filter,
+                    progress: progress,
+                    progressQueue: progressQueue,
+                    imageTransition: imageTransition,
+                    runImageTransitionIfCached: runImageTransitionIfCached,
+                    completion: completion)
+    }
+
+    @available(*, deprecated, message: "Replaced by `imageView.af.setImage(withURLRequest: ...)`")
+    public func af_setImage(withURLRequest urlRequest: URLRequestConvertible,
+                            cacheKey: String? = nil,
+                            placeholderImage: UIImage? = nil,
+                            serializer: ImageResponseSerializer? = nil,
+                            filter: ImageFilter? = nil,
+                            progress: ImageDownloader.ProgressHandler? = nil,
+                            progressQueue: DispatchQueue = DispatchQueue.main,
+                            imageTransition: ImageTransition = .noTransition,
+                            runImageTransitionIfCached: Bool = false,
+                            completion: ((AFIDataResponse<UIImage>) -> Void)? = nil) {
+        af.setImage(withURLRequest: urlRequest,
+                    cacheKey: cacheKey,
+                    placeholderImage: placeholderImage,
+                    serializer: serializer,
+                    filter: filter,
+                    progress: progress,
+                    progressQueue: progressQueue,
+                    imageTransition: imageTransition,
+                    runImageTransitionIfCached: runImageTransitionIfCached,
+                    completion: completion)
+    }
+
+    @available(*, deprecated, message: "Replaced by `imageView.af.cancelImageRequest()`")
+    public func af_cancelImageRequest() {
+        af.cancelImageRequest()
+    }
+
+    @available(*, deprecated, message: "Replaced by `imageView.af.run(_:with:)`")
+    public func run(_ imageTransition: ImageTransition, with image: Image) {
+        af.run(imageTransition, with: image)
+    }
+}
+
+// MARK: -
+
+private struct AssociatedKeys {
+    static var imageDownloader = "UIImageView.af.imageDownloader"
+    static var sharedImageDownloader = "UIImageView.af.sharedImageDownloader"
+    static var activeRequestReceipt = "UIImageView.af.activeRequestReceipt"
 }
 
 #endif

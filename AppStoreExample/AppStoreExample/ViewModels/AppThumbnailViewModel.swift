@@ -42,7 +42,7 @@ final class AppThumbnailViewModel {
         // Thubnails are short lived object so it's ok to not use weak self in this case,
         // To make sure we don't miss callbacks.
         AppThumbnailViewModel.imageDownloader.download(URLRequest(url: iconURL)) { response in
-            if let image = response.result.value {
+             if case .success(let image) = response.result {
                 self.icon = image
                 self.onDidLoad?()
             }

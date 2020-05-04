@@ -5,6 +5,7 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/AlamofireImage.svg?style=flat)](http://cocoadocs.org/docsets/AlamofireImage)
 [![Twitter](https://img.shields.io/badge/twitter-@AlamofireSF-blue.svg?style=flat)](http://twitter.com/AlamofireSF)
+[![Gitter](https://badges.gitter.im/Alamofire/Alamofire.svg)](https://gitter.im/Alamofire/Alamofire?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 AlamofireImage is an image component library for Alamofire.
 
@@ -18,80 +19,63 @@ AlamofireImage is an image component library for Alamofire.
 - [x] Authentication with URLCredential
 - [x] UIImageView Async Remote Downloads with Placeholders
 - [x] UIImageView Filters and Transitions
-- [x] Comprehensive Test Coverage
-- [x] [Complete Documentation](http://cocoadocs.org/docsets/AlamofireImage)
+- [x] Comprehensive Test Coverage 
+- [x] [Complete Documentation](https://alamofire.github.io/AlamofireImage/)
 
 ## Requirements
 
-- iOS 8.0+ / macOS 10.10+ / tvOS 9.0+ / watchOS 2.0+
-- Xcode 8.0+
-- Swift 3.0+
+- iOS 10.0+ / macOS 10.12+ / tvOS 10.0+ / watchOS 3.0+
+- Xcode 11+
+- Swift 5.1+
 
 ## Migration Guides
 
 - [AlamofireImage 2.0 Migration Guide](https://github.com/Alamofire/AlamofireImage/blob/master/Documentation/AlamofireImage%202.0%20Migration%20Guide.md)
 - [AlamofireImage 3.0 Migration Guide](https://github.com/Alamofire/AlamofireImage/blob/master/Documentation/AlamofireImage%203.0%20Migration%20Guide.md)
+- [AlamofireImage 4.0 Migration Guide](https://github.com/Alamofire/AlamofireImage/blob/master/Documentation/AlamofireImage%204.0%20Migration%20Guide.md)
 
 ## Dependencies
 
-- [Alamofire 4.0+](https://github.com/Alamofire/Alamofire)
+- [Alamofire 5.1+](https://github.com/Alamofire/Alamofire)
 
 ## Communication
 
-- If you **need help**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/alamofire). (Tag 'alamofire')
-- If you'd like to **ask a general question**, use [Stack Overflow](http://stackoverflow.com/questions/tagged/alamofire).
-- If you **found a bug**, open an issue.
-- If you **have a feature request**, open an issue.
+- If you need to **find or understand an API**, check [our documentation](https://alamofire.github.io/AlamofireImage/).
+- If you need **help with an AlamofireImage feature**, use [our forum on swift.org](https://forums.swift.org/c/related-projects/alamofire).
+- If you'd like to **discuss AlamofireImage best practices**, use [our forum on swift.org](https://forums.swift.org/c/related-projects/alamofire).
+- If you'd like to **discuss a feature request**, use [our forum on swift.org](https://forums.swift.org/c/related-projects/alamofire). 
+- If you **found a bug**, open an issue and follow the guide. The more detail the better!
 - If you **want to contribute**, submit a pull request.
 
 ## Installation
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
-
-```bash
-$ gem install cocoapods
-```
-
-> CocoaPods 1.1.0+ is required.
-
-To integrate AlamofireImage into your Xcode project using CocoaPods, specify it in your `Podfile`:
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate AlamofireImage into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
-use_frameworks!
-
-target '<Your Target Name>' do
-    pod 'AlamofireImage', '~> 3.1'
-end
-```
-
-Then, run the following command:
-
-```bash
-$ pod install
+pod 'AlamofireImage', '~> 4.1'
 ```
 
 ### Carthage
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
-
-You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
-
-```bash
-$ brew update
-$ brew install carthage
-```
-
-To integrate AlamofireImage into your Xcode project using Carthage, specify it in your `Cartfile`:
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate AlamofireImage into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "Alamofire/AlamofireImage" ~> 3.1
+github "Alamofire/AlamofireImage" ~> 4.1
 ```
 
-Run `carthage update` to build the framework and drag the built `AlamofireImage.framework` into your Xcode project.
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. It is in early development, but AlamofireImage does support its use on supported platforms.
+
+Once you have your Swift package set up, adding AlamofireImage as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Alamofire/AlamofireImage.git", .upToNextMajor(from: "4.1.0"))
+]
+```
 
 ### Manually
 
@@ -101,13 +85,13 @@ If you prefer not to use either of the aforementioned dependency managers, you c
 
 - Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
 
-  ```bash
+```bash
 $ git init
 ```
 
 - Add AlamofireImage as a git [submodule](http://git-scm.com/docs/git-submodule) by running the following command:
 
-  ```bash
+```bash
 $ git submodule add https://github.com/Alamofire/AlamofireImage.git
 ```
 
@@ -138,6 +122,7 @@ $ git submodule add https://github.com/Alamofire/AlamofireImage.git
 ### Image Response Serializers
 
 ```swift
+import Alamofire
 import AlamofireImage
 
 Alamofire.request("https://httpbin.org/image/png").responseImage { response in
@@ -147,13 +132,14 @@ Alamofire.request("https://httpbin.org/image/png").responseImage { response in
 	print(response.response)
 	debugPrint(response.result)
 
-	if let image = response.result.value {
+    if case .success(let image) = response.result {
 		print("image downloaded: \(image)")
 	}
 }
 ```
 
 The AlamofireImage response image serializers support a wide range of image types including:
+
 
 - `image/png`
 - `image/jpeg`
@@ -164,7 +150,9 @@ The AlamofireImage response image serializers support a wide range of image type
 - `image/bmp`
 - `image/x-bmp`
 - `image/x-xbitmap`
+- `image/x-ms-bmp`
 - `image/x-win-bitmap`
+- `application/octet-stream` (added for iOS 13 support)
 
 > If the image you are attempting to download is an invalid MIME type not in the list, you can add custom acceptable content types using the `addAcceptableImageContentTypes` extension on the `DataRequest` type.
 
@@ -179,7 +167,7 @@ let url = Bundle.main.url(forResource: "unicorn", withExtension: "png")!
 let data = try! Data(contentsOf: url)
 let image = UIImage(data: data, scale: UIScreen.main.scale)!
 
-image.af_inflate()
+image.af.inflate()
 ```
 
 > Inflating compressed image formats (such as PNG or JPEG) in a background queue can significantly improve drawing performance on the main thread.
@@ -191,13 +179,13 @@ let image = UIImage(named: "unicorn")!
 let size = CGSize(width: 100.0, height: 100.0)
 
 // Scale image to size disregarding aspect ratio
-let scaledImage = image.af_imageScaled(to: size)
+let scaledImage = image.af.imageScaled(to: size)
 
 // Scale image to fit within specified size while maintaining aspect ratio
-let aspectScaledToFitImage = image.af_imageAspectScaled(toFit: size)
+let aspectScaledToFitImage = image.af.imageAspectScaled(toFit: size)
 
 // Scale image to fill specified size while maintaining aspect ratio
-let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
+let aspectScaledToFillImage = image.af.imageAspectScaled(toFill: size)
 ```
 
 #### Rounded Corners
@@ -206,8 +194,8 @@ let aspectScaledToFillImage = image.af_imageAspectScaled(toFill: size)
 let image = UIImage(named: "unicorn")!
 let radius: CGFloat = 20.0
 
-let roundedImage = image.af_imageRounded(withCornerRadius: radius)
-let circularImage = image.af_imageRoundedIntoCircle()
+let roundedImage = image.af.imageRounded(withCornerRadius: radius)
+let circularImage = image.af.imageRoundedIntoCircle()
 ```
 
 #### Core Image Filters
@@ -215,10 +203,10 @@ let circularImage = image.af_imageRoundedIntoCircle()
 ```swift
 let image = UIImage(named: "unicorn")!
 
-let sepiaImage = image.af_imageFiltered(withCoreImageFilter: "CISepiaTone")
+let sepiaImage = image.af.imageFiltered(withCoreImageFilter: "CISepiaTone")
 
-let blurredImage = image.af_imageFiltered(
-    withCoreImageFilter: "CIGuassianBlur",
+let blurredImage = image.af.imageFiltered(
+    withCoreImageFilter: "CIGaussianBlur",
     parameters: ["inputRadius": 25]
 )
 ```
@@ -279,7 +267,7 @@ The current list of multi-pass image filters includes:
 
 ### Image Cache
 
-Image caching can become complicated when it comes to network images. `URLCache` is quite powerful and does a great job reasoning through the various cache policies and `Cache-Control` headers. However, it is not equiped to handle caching multiple modified versions of those images.
+Image caching can become complicated when it comes to network images. `URLCache` is quite powerful and does a great job reasoning through the various cache policies and `Cache-Control` headers. However, it is not equipped to handle caching multiple modified versions of those images.
 
 For example, let's say you need to download an album of images. Your app needs to display both the thumbnail version as well as the full size version at various times. Due to performance issues, you want to scale down the thumbnails to a reasonable size before rendering them on-screen. You also need to apply a global CoreImage filter to the full size images when displayed. While `URLCache` can easily handle storing the original downloaded image, it cannot store these different variants. What you really need is another caching layer designed to handle these different variants.
 
@@ -318,7 +306,7 @@ The `ImageRequestCache` protocol extends the `ImageCache` protocol by adding sup
 let imageCache = AutoPurgingImageCache()
 
 let urlRequest = URLRequest(url: URL(string: "https://httpbin.org/image/png")!)
-let avatarImage = UIImage(named: "avatar")!.af_imageRoundedIntoCircle()
+let avatarImage = UIImage(named: "avatar")!.af.imageRoundedIntoCircle()
 
 // Add
 imageCache.add(avatarImage, for: urlRequest, withIdentifier: "circle")
@@ -373,7 +361,7 @@ downloader.download(urlRequest) { response in
     print(response.response)
     debugPrint(response.result)
 
-    if let image = response.result.value {
+    if case .success(let image) = response.result {
         print(image)
     }
 }
@@ -393,7 +381,7 @@ downloader.download(urlRequest, filter: filter) { response in
     print(response.response)
     debugPrint(response.result)
 
-    if let image = response.result.value {
+    if case .success(let image) = response.result {
         print(image)
     }
 }
@@ -438,14 +426,14 @@ The `ImageCache` is used to cache all the potentially filtered image content aft
 
 Determining the ideal the in-memory and on-disk capacity limits of the `URLCache` and `AutoPurgingImageCache` requires a bit of forethought. You must carefully consider your application's needs, and tailor the limits accordingly. By default, the combination of caches offers the following storage capacities:
 
-- 150 MB of on-disk storage
-- 20 MB of in-memory original image data storage
-- 100 MB of in-memory storage of filtered image content
+- 150 MB of on-disk storage (original image only)
+- 20 MB of in-memory original image data storage (original image only)
+- 100 MB of in-memory storage of filtered image content (filtered image if using filters, otherwise original image)
 - 60 MB preferred memory capacity after purge of filtered image content
 
-> If you do not use image filters, it is advised to set the memory capacity of the `URLCache` to zero to avoid storing the same content in-memory twice.
+> If you do not use image filters, it is advised to set the memory capacity of the `URLCache` to zero. Otherwise, you will be storing the original image data in both the URLCache's in-memory store as well as the AlamofireImage in-memory store.
 
-#### Duplicate Downloads
+#### Duplicate Downloads    
 
 Sometimes application logic can end up attempting to download an image more than once before the initial download request is complete. Most often, this results in the image being downloaded more than once. AlamofireImage handles this case elegantly by merging the duplicate downloads. The image will only be downloaded once, yet both completion handlers will be called.
 
@@ -473,7 +461,7 @@ Setting the image with a URL will asynchronously download the image and set it o
 let imageView = UIImageView(frame: frame)
 let url = URL(string: "https://httpbin.org/image/png")!
 
-imageView.af_setImage(withURL: url)
+imageView.af.setImage(withURL: url)
 ```
 
 > If the image is cached locally, the image is set immediately.
@@ -487,7 +475,7 @@ let imageView = UIImageView(frame: frame)
 let url = URL(string: "https://httpbin.org/image/png")!
 let placeholderImage = UIImage(named: "placeholder")!
 
-imageView.af_setImage(withURL: url, placeholderImage: placeholderImage)
+imageView.af.setImage(withURL: url, placeholderImage: placeholderImage)
 ```
 
 > If the remote image is cached locally, the placeholder image is never set.
@@ -507,7 +495,7 @@ let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
     radius: 20.0
 )
 
-imageView.af_setImage(
+imageView.af.setImage(
     withURL: url,
     placeholderImage: placeholderImage,
     filter: filter
@@ -531,7 +519,7 @@ let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
     radius: 20.0
 )
 
-imageView.af_setImage(
+imageView.af.setImage(
     withURL: url,
     placeholderImage: placeholderImage,
     filter: filter,
@@ -565,18 +553,23 @@ If you believe you have identified a security vulnerability with AlamofireImage,
 
 ## Donations
 
-The [ASF](https://github.com/Alamofire/Foundation#members) is looking to raise money to officially register as a federal non-profit organization. Registering will allow us members to gain some legal protections and also allow us to put donations to use, tax free. Donating to the ASF will enable us to:
+The [ASF](https://github.com/Alamofire/Foundation#members) is looking to raise money to officially stay registered as a federal non-profit organization.
+Registering will allow us members to gain some legal protections and also allow us to put donations to use, tax free.
+Donating to the ASF will enable us to:
 
-* Pay our legal fees to register as a federal non-profit organization
-* Pay our yearly legal fees to keep the non-profit in good status
-* Pay for our mail servers to help us stay on top of all questions and security issues
-* Potentially fund test servers to make it easier for us to test the edge cases
-* Potentially fund developers to work on one of our projects full-time
+- Pay our yearly legal fees to keep the non-profit in good status
+- Pay for our mail servers to help us stay on top of all questions and security issues
+- Potentially fund test servers to make it easier for us to test the edge cases
+- Potentially fund developers to work on one of our projects full-time
 
-The community adoption of the ASF libraries has been amazing. We are greatly humbled by your enthusiam around the projects, and want to continue to do everything we can to move the needle forward. With your continued support, the ASF will be able to improve its reach and also provide better legal safety for the core members. If you use any of our libraries for work, see if your employers would be interested in donating. Our initial goal is to raise $1000 to get all our legal ducks in a row and kickstart this campaign. Any amount you can donate today to help us reach our goal would be greatly appreciated.
+The community adoption of the ASF libraries has been amazing.
+We are greatly humbled by your enthusiasm around the projects, and want to continue to do everything we can to move the needle forward.
+With your continued support, the ASF will be able to improve its reach and also provide better legal safety for the core members.
+If you use any of our libraries for work, see if your employers would be interested in donating.
+Any amount you can donate today to help us reach our goal would be greatly appreciated.
 
-<a href='https://pledgie.com/campaigns/31474'><img alt='Click here to lend your support to: Alamofire Software Foundation and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/31474.png?skin_name=chrome' border='0' ></a>
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W34WPEE74APJQ)
 
 ## License
 
-AlamofireImage is released under the MIT license. See LICENSE for details.
+AlamofireImage is released under the MIT license. [See LICENSE](https://github.com/Alamofire/AlamofireImage/blob/master/LICENSE) for details.

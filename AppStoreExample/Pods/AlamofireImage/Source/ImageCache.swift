@@ -1,7 +1,7 @@
 //
 //  ImageCache.swift
 //
-//  Copyright (c) 2015-2016 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2015 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -78,13 +78,13 @@ open class AutoPurgingImageCache: ImageRequestCache {
         init(_ image: Image, identifier: String) {
             self.image = image
             self.identifier = identifier
-            self.lastAccessDate = Date()
+            lastAccessDate = Date()
 
-            self.totalBytes = {
+            totalBytes = {
                 #if os(iOS) || os(tvOS) || os(watchOS)
-                    let size = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
+                let size = CGSize(width: image.size.width * image.scale, height: image.size.height * image.scale)
                 #elseif os(macOS)
-                    let size = CGSize(width: image.size.width, height: image.size.height)
+                let size = CGSize(width: image.size.width, height: image.size.height)
                 #endif
 
                 let bytesPerPixel: CGFloat = 4.0
@@ -106,17 +106,17 @@ open class AutoPurgingImageCache: ImageRequestCache {
     /// The current total memory usage in bytes of all images stored within the cache.
     open var memoryUsage: UInt64 {
         var memoryUsage: UInt64 = 0
-        synchronizationQueue.sync { memoryUsage = self.currentMemoryUsage }
+        synchronizationQueue.sync(flags: [.barrier]) { memoryUsage = self.currentMemoryUsage }
 
         return memoryUsage
     }
 
     /// The total memory capacity of the cache in bytes.
-    open let memoryCapacity: UInt64
+    public let memoryCapacity: UInt64
 
     /// The preferred memory usage after purge in bytes. During a purge, images will be purged until the memory
     /// capacity drops below this limit.
-    open let preferredMemoryUsageAfterPurge: UInt64
+    public let preferredMemoryUsageAfterPurge: UInt64
 
     private let synchronizationQueue: DispatchQueue
     private var cachedImages: [String: CachedImage]
@@ -124,7 +124,7 @@ open class AutoPurgingImageCache: ImageRequestCache {
 
     // MARK: Initialization
 
-    /// Initialies the `AutoPurgingImageCache` instance with the given memory capacity and preferred memory usage
+    /// Initializes the `AutoPurgingImageCache` instance with the given memory capacity and preferred memory usage
     /// after purge limit.
     ///
     /// Please note, the memory capacity must always be greater than or equal to the preferred memory usage after purge.
@@ -137,26 +137,24 @@ open class AutoPurgingImageCache: ImageRequestCache {
         self.memoryCapacity = memoryCapacity
         self.preferredMemoryUsageAfterPurge = preferredMemoryUsageAfterPurge
 
-        precondition(
-            memoryCapacity >= preferredMemoryUsageAfterPurge,
-            "The `memoryCapacity` must be greater than or equal to `preferredMemoryUsageAfterPurge`"
-        )
+        precondition(memoryCapacity >= preferredMemoryUsageAfterPurge,
+                     "The `memoryCapacity` must be greater than or equal to `preferredMemoryUsageAfterPurge`")
 
-        self.cachedImages = [:]
-        self.currentMemoryUsage = 0
+        cachedImages = [:]
+        currentMemoryUsage = 0
 
-        self.synchronizationQueue = {
+        synchronizationQueue = {
             let name = String(format: "org.alamofire.autopurgingimagecache-%08x%08x", arc4random(), arc4random())
             return DispatchQueue(label: name, attributes: .concurrent)
         }()
 
         #if os(iOS) || os(tvOS)
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(AutoPurgingImageCache.removeAllImages),
-                name: Notification.Name.UIApplicationDidReceiveMemoryWarning,
-                object: nil
-            )
+        let notification = UIApplication.didReceiveMemoryWarningNotification
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(AutoPurgingImageCache.removeAllImages),
+                                               name: notification,
+                                               object: nil)
         #endif
     }
 
@@ -196,8 +194,8 @@ open class AutoPurgingImageCache: ImageRequestCache {
             if self.currentMemoryUsage > self.memoryCapacity {
                 let bytesToPurge = self.currentMemoryUsage - self.preferredMemoryUsageAfterPurge
 
+                var sortedImages = self.cachedImages.map { $1 }
 
-                var sortedImages = self.cachedImages.map{$1}
                 sortedImages.sort {
                     let date1 = $0.lastAccessDate
                     let date2 = $1.lastAccessDate
@@ -245,7 +243,7 @@ open class AutoPurgingImageCache: ImageRequestCache {
         let requestIdentifier = imageCacheKey(for: request, withIdentifier: nil)
         var removed = false
 
-        synchronizationQueue.sync {
+        synchronizationQueue.sync(flags: [.barrier]) {
             for key in self.cachedImages.keys where key.hasPrefix(requestIdentifier) {
                 if let cachedImage = self.cachedImages.removeValue(forKey: key) {
                     self.currentMemoryUsage -= cachedImage.totalBytes
@@ -266,7 +264,7 @@ open class AutoPurgingImageCache: ImageRequestCache {
     open func removeImage(withIdentifier identifier: String) -> Bool {
         var removed = false
 
-        synchronizationQueue.sync {
+        synchronizationQueue.sync(flags: [.barrier]) {
             if let cachedImage = self.cachedImages.removeValue(forKey: identifier) {
                 self.currentMemoryUsage -= cachedImage.totalBytes
                 removed = true
@@ -283,7 +281,7 @@ open class AutoPurgingImageCache: ImageRequestCache {
     open func removeAllImages() -> Bool {
         var removed = false
 
-        synchronizationQueue.sync {
+        synchronizationQueue.sync(flags: [.barrier]) {
             if !self.cachedImages.isEmpty {
                 self.cachedImages.removeAll()
                 self.currentMemoryUsage = 0
@@ -316,7 +314,7 @@ open class AutoPurgingImageCache: ImageRequestCache {
     open func image(withIdentifier identifier: String) -> Image? {
         var image: Image?
 
-        synchronizationQueue.sync {
+        synchronizationQueue.sync(flags: [.barrier]) {
             if let cachedImage = self.cachedImages[identifier] {
                 image = cachedImage.accessImage()
             }

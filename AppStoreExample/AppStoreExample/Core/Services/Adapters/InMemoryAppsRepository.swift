@@ -22,12 +22,12 @@ class InMemoryAppsRepository: AppsRepository {
     }
     
     func listAllApps() -> AnyCollection<AppData> {
-        let sortedApps = allApps.map { $0.value }.sorted { $0.0.rank < $0.1.rank }
+        let sortedApps = allApps.map { $0.value }.sorted { $0.rank < $1.rank }
         return AnyCollection(sortedApps)
     }
     
     func listApps(byCategory category: String) -> AnyCollection<AppData> {
-        let sortedAppsByCategory = allApps.map { $0.value }.filter { $0.category == category }.sorted { $0.0.rank < $0.1.rank }
+        let sortedAppsByCategory = allApps.map { $0.value }.filter { $0.category == category }.sorted { $0.rank < $1.rank }
         return AnyCollection(sortedAppsByCategory)
     }
     
