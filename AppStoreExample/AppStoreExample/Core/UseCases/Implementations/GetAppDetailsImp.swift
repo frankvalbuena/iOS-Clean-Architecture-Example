@@ -8,7 +8,13 @@
 
 import Foundation
 
-class GetAppDetailsImpl: UseCaseImpl, GetAppDetails {
+final class GetAppDetailsImpl: GetAppDetails {
+    private let repository: AppsRepository
+    
+    init(repository: AppsRepository) {
+        self.repository = repository
+    }
+    
     func getDetails(appstoreId: String) -> AppDetailsDTO? {
         guard let app = repository.findApp(appstoreId: appstoreId) else {
             return nil

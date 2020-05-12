@@ -8,7 +8,13 @@
 
 import Foundation
 
-class ListCategoriesImpl: UseCaseImpl, ListCategories {
+final class ListCategoriesImpl: ListCategories {
+    private let repository: AppsRepository
+    
+    init(repository: AppsRepository) {
+        self.repository = repository
+    }
+    
     func listAll() -> [String] {
         return repository.listCategories()
     }

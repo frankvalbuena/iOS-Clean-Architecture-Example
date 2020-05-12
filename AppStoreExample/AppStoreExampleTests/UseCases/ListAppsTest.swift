@@ -11,16 +11,14 @@ import XCTest
 
 class ListAppsTest: XCTestCase {
     func testListAllApps() {
-        let mockService = MockAppStoreService(mockResponse: .failure)
         let mockRepository = MockAppsRepository()
         let app1 = buildApp(appstoreId: "1", rank: 1)
         let app2 = buildApp(appstoreId: "2", rank: 2)
         
         let save = expectation(description: "Saving apps")
         mockRepository.save(apps: [app1, app2]) { _ in
-            let listedApps = ListAppsImpl(repository: mockRepository, service: mockService).listAllApps()
+            let listedApps = ListAppsImpl(repository: mockRepository).listAllApps()
             
-            XCTAssertFalse(mockService.serviceCalled, "List Use Case ALWAYS should use cached data")
             XCTAssertEqual(listedApps.count, 2, "Two Mock Saved")
             XCTAssertEqual(listedApps.first!.appstoreID, app1.appstoreID, "App 1 comes first")
             XCTAssertEqual(listedApps.first!.name, app1.shortName, "input must match output")
@@ -31,7 +29,6 @@ class ListAppsTest: XCTestCase {
     }
     
     func testListAppsByCategory() {
-        let mockService = MockAppStoreService(mockResponse: .failure)
         let mockRepository = MockAppsRepository()
         let app1 = buildApp(appstoreId: "1", rank: 1, category: "Category A")
         let app2 = buildApp(appstoreId: "2", rank: 2, category: "Category A")
@@ -39,10 +36,9 @@ class ListAppsTest: XCTestCase {
         
         let save = expectation(description: "Saving apps")
         mockRepository.save(apps: [app1, app2, app3]) { _ in
-            let categoryA = ListAppsImpl(repository: mockRepository, service: mockService).listApps(byCategory: "Category A")
-            let categoryB = ListAppsImpl(repository: mockRepository, service: mockService).listApps(byCategory: "Category B")
+            let categoryA = ListAppsImpl(repository: mockRepository).listApps(byCategory: "Category A")
+            let categoryB = ListAppsImpl(repository: mockRepository).listApps(byCategory: "Category B")
             
-            XCTAssertFalse(mockService.serviceCalled, "List Use Case ALWAYS should use cached data")
             XCTAssertEqual(categoryA.count, 2, "Two Mocks saved for Category A")
             XCTAssertEqual(categoryA.first!.appstoreID, app1.appstoreID, "App 1 comes first")
             XCTAssertEqual(categoryB.count, 1, "Single mock saved for Category B")

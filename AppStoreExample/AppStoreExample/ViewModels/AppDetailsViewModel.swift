@@ -19,8 +19,8 @@ final class AppDetailsViewModel {
     
     private let imageDownloader = ImageDownloader()
     
-    init(appID: String, locator: UseCaseLocatorProtocol) {
-        guard let details = locator.getUseCase(ofType: GetAppDetails.self)?.getDetails(appstoreId: appID) else {
+    init(appID: String, getAppDetails: GetAppDetails) {
+        guard let details = getAppDetails.getDetails(appstoreId: appID) else {
             self.name = ""
             self.summary = ""
             self.additionalInformation = []

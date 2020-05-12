@@ -8,12 +8,11 @@
 
 import Foundation
 
-class MockAppStoreService: AppStoreService {
-    let mockResponse: AppStoreResponse
+final class MockAppStoreService: AppStoreService {
+    var mockResponse: AppStoreResponse!
     var serviceCalled: Bool = false
     
-    init(mockResponse: AppStoreResponse) {
-        self.mockResponse = mockResponse
+    init() {
     }
     
     func retrieveTopFreeApps(count: Int, completion: @escaping (AppStoreResponse) -> Void) {

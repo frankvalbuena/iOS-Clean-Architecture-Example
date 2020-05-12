@@ -9,17 +9,14 @@
 import XCTest
 @testable import AppStoreExample
 
-class GetAppDetailsTest: XCTestCase {
+final class GetAppDetailsTest: XCTestCase {
     func testGetDetails() {
-        let mockService = MockAppStoreService(mockResponse: .failure)
         let mockRepository = MockAppsRepository()
         let mockApp = buildApp(appstoreId: "1", rank: 1)
         
         let save = expectation(description: "Saving apps")
         mockRepository.save(apps: [mockApp]) { _ in
-            let details = GetAppDetailsImpl(repository: mockRepository, service: mockService).getDetails(appstoreId: "1")
-            
-            XCTAssertFalse(mockService.serviceCalled, "GetAppDetails Use Case ALWAYS should use cached data")
+            let details = GetAppDetailsImpl(repository: mockRepository).getDetails(appstoreId: "1")
             
             XCTAssertNotNil(details)
             XCTAssertEqual(details!.appstoreID, mockApp.appstoreID, "App 1 comes first")
@@ -42,7 +39,7 @@ private extension GetAppDetailsTest {
         return RawAppData(appstoreID: appstoreId,
                           shortName: "Short Name",
                           detailName: "Complete Name",
-                          artist: "Francisco Valbuena",
+                          artist: "Frank Valbuena",
                           category: category,
                           releaseDate: "1/4/17",
                           summary: "This is a Mock app for testing",

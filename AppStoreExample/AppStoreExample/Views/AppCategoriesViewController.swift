@@ -11,7 +11,16 @@ import UIKit
 
 final class AppCategoriesViewController: UITableViewController {
     static let cellId = "CategoryCellId"
-    let viewModel = AppCategoriesViewModel(locator: UseCaseLocator.defaultLocator)
+    private let viewModel: AppCategoriesViewModel
+    
+    init?(viewModel: AppCategoriesViewModel) {
+        self.viewModel = viewModel
+        super.init(style: .grouped)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Use init(viewModel:coder: instead)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,7 +8,13 @@
 
 import Foundation
 
-class ListAppsImpl: UseCaseImpl, ListApps {
+final class ListAppsImpl: ListApps {
+    private let repository: AppsRepository
+    
+    init(repository: AppsRepository) {
+        self.repository = repository
+    }
+    
     func listAllApps() -> AnyCollection<AppThumbnailDTO> {
         let lazyThumbnails = repository.listAllApps().lazy.map(ListAppsImpl.buildThumbnail)
         return AnyCollection(lazyThumbnails)

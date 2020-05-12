@@ -9,9 +9,26 @@
 import XCTest
 @testable import AppStoreExample
 
-class SyncAppDataTest: XCTestCase {
+final class SyncAppDataTest: XCTestCase {
+    var service: MockAppStoreService!
+    var repository: MockAppsRepository!
+    var syncUseCase: SyncAppDataImpl!
+    
+    override func setUpWithError() throws {
+        service = MockAppStoreService()
+        repository = MockAppsRepository()
+        syncUseCase = SyncAppDataImpl(repository: repository, service: service)
+    }
+    
+    override func tearDownWithError() throws {
+        service = nil
+        repository = nil
+        syncUseCase = nil
+    }
+    
     func testFailure() {
-        sync(withResponse: .failure) { (_, result) in
+        service.mockResponse = .notConnectedToInternet
+        syncUseCase.sync { result in
             if case .failure = result {
                 print("Good status")
             } else {
@@ -21,7 +38,8 @@ class SyncAppDataTest: XCTestCase {
     }
     
     func testNotInternetConnection() {
-        sync(withResponse: .notConnectedToInternet) { (_, result) in
+        service.mockResponse = .notConnectedToInternet
+        syncUseCase.sync { (result) in
             switch result {
             case .failure(error: .notInternetConnection):
                 break
@@ -43,28 +61,20 @@ class SyncAppDataTest: XCTestCase {
                                  bannerURL: URL(string: "http://mock.com/mockBanner.png"),
                                  iconURL: URL(string: "http://mock.com/mockIcon.png"),
                                  rank: 0)
-        sync(withResponse: .success(apps: [mockApp])) { (useCase, result) in
+        service.mockResponse = .success(apps: [mockApp])
+        syncUseCase.sync { [weak self] result in
+            guard let self = self else {
+                XCTFail("This test is sync given that mocks answer sync")
+                return
+            }
             if case .success = result {
-                let repository = useCase.repository as! MockAppsRepository
-                
-                XCTAssertTrue(useCase.hasCachedData, "Data needs to be cached")
-                XCTAssertEqual(useCase.repository.listAllApps().count, 1, "Mock App Saved")
-                XCTAssertTrue(repository.removeAllAppsCalled, "Old Data needs to be removed, otherwise rank could be messed up")
+                XCTAssertTrue(self.syncUseCase.hasCachedData, "Data needs to be cached")
+                XCTAssertEqual(self.repository.listAllApps().count, 1, "Mock App Saved")
+                XCTAssertTrue(self.repository.removeAllAppsCalled,
+                              "Old Data needs to be removed, otherwise rank could be messed up")
             } else {
                 XCTFail("Sync is not synching data correctly")
             }
-        }
-    }
-}
-
-private extension SyncAppDataTest {
-    func sync(withResponse response: AppStoreResponse, completion: @escaping (SyncAppDataImpl, SyncResult) -> Void) {
-        let service = MockAppStoreService(mockResponse: response)
-        let repository = MockAppsRepository()
-        let syncUseCase = SyncAppDataImpl(repository: repository, service: service)
-        
-        syncUseCase.sync { result in
-            completion(syncUseCase, result)
         }
     }
 }

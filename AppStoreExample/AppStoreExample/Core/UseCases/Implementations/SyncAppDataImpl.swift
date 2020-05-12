@@ -8,9 +8,17 @@
 
 import Foundation
 
-final class SyncAppDataImpl: UseCaseImpl, SyncAppData {
-    static var lastSyncResult: SyncResult? = nil
-    static let numberOfAppsToSync: Int = 100
+final class SyncAppDataImpl: SyncAppData {
+    private static var lastSyncResult: SyncResult? = nil
+    private static let numberOfAppsToSync: Int = 100
+    
+    private let repository: AppsRepository
+    private let service: AppStoreService
+    
+    init(repository: AppsRepository, service: AppStoreService) {
+        self.repository = repository
+        self.service = service
+    }
     
     var hasCachedData: Bool {
         return repository.lastSyncDate != nil

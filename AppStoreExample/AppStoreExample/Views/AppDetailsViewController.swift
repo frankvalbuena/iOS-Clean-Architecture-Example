@@ -9,23 +9,30 @@
 import Foundation
 import UIKit
 
-class AppInfoCell: UITableViewCell {
+final class AppInfoCell: UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
 }
 
-class AppDetailsViewController: UITableViewController {
+final class AppDetailsViewController: UITableViewController {
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var appNameLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var informationTableView: UITableView!
     
-    var viewModel: AppDetailsViewModel! {
-        didSet { configureUI() }
-    }
     lazy var infoDataSource: UITableViewDataSource = {
         return AppInfoDatasource(info: self.viewModel.additionalInformation)
     }()
+    private let viewModel: AppDetailsViewModel
+    
+    init?(viewModel: AppDetailsViewModel, coder: NSCoder) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Use init(viewModel:coder:)")
+    }
     
     override func viewDidLoad() {
         self.navigationItem.title = "App Details"
@@ -47,9 +54,6 @@ class AppDetailsViewController: UITableViewController {
     }
     
     private func configureUI() {
-        guard let viewModel = self.viewModel else {
-            return
-        }
         appNameLabel?.text = viewModel.name
         summaryLabel?.text = viewModel.summary
         informationTableView?.dataSource = infoDataSource
@@ -76,7 +80,7 @@ class AppDetailsViewController: UITableViewController {
     }
 }
 
-class AppInfoDatasource: NSObject, UITableViewDataSource {
+final class AppInfoDatasource: NSObject, UITableViewDataSource {
     static let cellID = "InfoCellID"
     
     let info: [(type: String, value: String)]

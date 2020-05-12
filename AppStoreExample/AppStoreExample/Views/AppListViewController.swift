@@ -10,13 +10,25 @@ import Foundation
 import UIKit
 
 final class AppListViewController: UIViewController {
-    fileprivate let listViewModel = AppListViewModel(locator: UseCaseLocator.defaultLocator)
-    
     weak var listView: AppListView?
-    var selectedApp: AppThumbnailViewModel? = nil
     var warningAlert: UIAlertController? = nil
     @IBOutlet weak var categoriesButton: UIButton?
     @IBOutlet weak var listContainerView: UIView?
+    
+    fileprivate let listViewModel: AppListViewModel
+    fileprivate let appDetails: View.Details
+    fileprivate let categories: View.Categories
+    
+    init?(viewModel: AppListViewModel, details: View.Details, categories: View.Categories, coder: NSCoder) {
+        self.listViewModel = viewModel
+        self.appDetails = details
+        self.categories = categories
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Use init(viewModel:details:categories:coder:)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +38,6 @@ final class AppListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.selectedApp = nil
         
         if let warningAlert = self.warningAlert {
             present(warningAlert, animated: true, completion: nil)
@@ -34,21 +45,13 @@ final class AppListViewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let selectedApp = self.selectedApp, segue.identifier == AppSegueID.showDetail.rawValue {
-            let detail = (segue.destination as? UINavigationController)?.topViewController as? AppDetailsViewController
-            
-            detail?.viewModel = AppDetailsViewModel(appID: selectedApp.appID,
-                                                    locator: UseCaseLocator.defaultLocator)
-        }
-    }
-    
     @IBAction func onCategory() {
-        let categoriesVC = AppCategoriesViewController(style: .grouped)
-        
-        categoriesVC.viewModel.selectedCategory = listViewModel.selectedCategory
-        categoriesVC.viewModel.onDidChangeSelectedCategory = { [weak self, weak categoriesVC] in
-            self?.listViewModel.selectedCategory = categoriesVC?.viewModel.selectedCategory
+        guard let categoriesVC = self.categories(configuration: .init(selectedCategory: listViewModel.selectedCategory) {
+            [weak self] selectedCategory in
+                self?.listViewModel.selectedCategory = selectedCategory
+            }
+        ) else {
+             return
         }
         let nav = UINavigationController(rootViewController: categoriesVC)
         
@@ -129,8 +132,10 @@ extension AppListViewController: AppListViewDelegate {
     }
     
     func didSelect(cell: AppListCell, atIndex index: Int) {
-        self.selectedApp = thumbnail(atIndex: index)
-        self.performSegue(withIdentifier: AppSegueID.showDetail.rawValue, sender: self)
+        guard let details = self.appDetails(configuration: .init(appId: thumbnail(atIndex: index).appID)) else {
+            return
+        }
+        present(details, animated: true, completion: nil)
     }
     
     private func thumbnail(atIndex index: Int) -> AppThumbnailViewModel {

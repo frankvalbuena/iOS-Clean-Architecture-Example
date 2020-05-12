@@ -9,39 +9,36 @@
 import Foundation
 
 final class AppSyncViewModel {
-    
     enum State {
         case idle
         case finish(errorMessage: String?)
         case syncing
     }
     
-    private let locator: UseCaseLocatorProtocol
-    
     var onDidChangeState: ((State) -> Void)? = nil
     fileprivate(set) var appSyncState: State = .idle {
         didSet { onDidChangeState?(appSyncState) }
     }
     
-    init(locator: UseCaseLocatorProtocol) {
-        self.locator = locator
+    private let syncAppData: SyncAppData
+    
+    init(syncAppData: SyncAppData) {
+        self.syncAppData = syncAppData
     }
     
     func startSync() {
-        guard let syncUseCase = locator.getUseCase(ofType: SyncAppData.self) else {
-            appSyncState = .finish(errorMessage: "An known error has occurred")
-            return
-        }
         appSyncState = .syncing
-        syncUseCase.sync { [weak self] result in
-            self?.didFinishSync(result: result, hasCachedData: syncUseCase.hasCachedData)
+        syncAppData.sync { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            self.didFinishSync(result: result, hasCachedData: self.syncAppData.hasCachedData)
         }
     }
     
 }
 
 fileprivate extension AppSyncViewModel {
-    
     func didFinishSync(result: SyncResult, hasCachedData: Bool) {
         switch result {
         case .success:
@@ -54,5 +51,4 @@ fileprivate extension AppSyncViewModel {
             appSyncState = .finish(errorMessage: error)
         }
     }
-    
 }

@@ -10,11 +10,22 @@ import Foundation
 import UIKit
 
 final class AppSyncViewController: UIViewController {
-    let viewModel = AppSyncViewModel(locator: UseCaseLocator.defaultLocator)
-    
     @IBOutlet weak var errorLabel: UILabel?
     @IBOutlet weak var retryButton: UIButton?
     @IBOutlet weak var retryContainerView: UIView?
+    
+    private let viewModel: AppSyncViewModel
+    private let appList: View.AppList
+    
+    init?(viewModel: AppSyncViewModel, appList: View.AppList, coder: NSCoder) {
+        self.viewModel = viewModel
+        self.appList = appList
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("Use init(viewModel:coder:)")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +41,7 @@ final class AppSyncViewController: UIViewController {
 
 private extension AppSyncViewController {
     func configureUI() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         retryButton?.layer.borderColor = UIColor.darkGray.cgColor
         retryButton?.layer.borderWidth = 1.0
         retryButton?.layer.cornerRadius = 3.0
@@ -44,18 +56,23 @@ private extension AppSyncViewController {
     
     func onDidChange(state: AppSyncViewModel.State) {
         switch state {
-        case .finish(let errorMessage):
-            guard let message = errorMessage else {
-                performSegue(withIdentifier: AppSegueID.showList.rawValue, sender: self)
-                return
-            }
+        case .finish(errorMessage: .none):
+            self.goToAppList()
+        case .finish(.some(let errorMessage)):
             retryContainerView?.isHidden = false
-            errorLabel?.text = message
+            errorLabel?.text = errorMessage
             break
         case .syncing:
             self.retryContainerView?.isHidden = true
         case .idle:
             break
         }
+    }
+    
+    func goToAppList() {
+        guard let appList = self.appList(configuration: ()) else {
+            return
+        }
+        self.navigationController?.pushViewController(appList, animated: true)
     }
 }

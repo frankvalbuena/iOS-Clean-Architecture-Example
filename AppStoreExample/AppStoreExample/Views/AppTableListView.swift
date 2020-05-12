@@ -14,7 +14,7 @@ extension UITableViewCell: AppListCell {
     var iconImageView: UIImageView? { return imageView }
 }
 
-class AppTableListView: UITableView  {
+final class AppTableListView: UITableView  {
     fileprivate static let cellId = "AppListCellID"
     weak var listDelegate: AppListViewDelegate?
     

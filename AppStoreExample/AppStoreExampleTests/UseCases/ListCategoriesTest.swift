@@ -11,7 +11,6 @@ import XCTest
 
 class ListCategoriesTest: XCTestCase {
     func testListCategories() {
-        let mockService = MockAppStoreService(mockResponse: .failure)
         let mockRepository = MockAppsRepository()
         let app1 = buildApp(appstoreId: "1", rank: 1, category: "Category A")
         let app2 = buildApp(appstoreId: "2", rank: 2, category: "Category A")
@@ -19,9 +18,8 @@ class ListCategoriesTest: XCTestCase {
         
         let save = expectation(description: "Saving apps")
         mockRepository.save(apps: [app1, app2, app3]) { _ in
-            let categories = ListCategoriesImpl(repository: mockRepository, service: mockService).listAll()
+            let categories = ListCategoriesImpl(repository: mockRepository).listAll()
             
-            XCTAssertFalse(mockService.serviceCalled, "List Use Case ALWAYS should use cached data")
             XCTAssertEqual(categories, ["Category A", "Category B"])
             save.fulfill()
         }

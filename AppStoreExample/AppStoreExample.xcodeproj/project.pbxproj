@@ -3,11 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		47E82369792B40C3DAB1B5A3 /* Pods_AppStoreExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */; };
+		66816D822460923D00206215 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D812460923D00206215 /* Service.swift */; };
+		66816D84246092AA00206215 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D83246092AA00206215 /* ViewModel.swift */; };
+		66816D862460B4AD00206215 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D852460B4AD00206215 /* View.swift */; };
+		66816D882460E0FD00206215 /* AppBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D872460E0FD00206215 /* AppBoundary.swift */; };
+		66816D8A2460E4AC00206215 /* SceneAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D892460E4AC00206215 /* SceneAppDelegate.swift */; };
+		66816D8C2461D02D00206215 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66816D8B2461D02D00206215 /* Entity.swift */; };
+		66816DF8246A73FC00206215 /* Boundaries in Frameworks */ = {isa = PBXBuildFile; productRef = 66816DF7246A73FC00206215 /* Boundaries */; };
 		73160B1A1E1DA88800652C99 /* ListAppsImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B191E1DA88800652C99 /* ListAppsImpl.swift */; };
 		73160B1C1E1DA99900652C99 /* ListCategoriesImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */; };
 		73160B1E1E1DB9FD00652C99 /* ListAppsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */; };
@@ -24,17 +31,15 @@
 		73236C451E1C387900B0B9CC /* AppsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C441E1C387900B0B9CC /* AppsRepository.swift */; };
 		73236C471E1C38E500B0B9CC /* ListApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C461E1C38E500B0B9CC /* ListApps.swift */; };
 		73236C491E1C390D00B0B9CC /* ListCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C481E1C390D00B0B9CC /* ListCategories.swift */; };
-		73236C4B1E1C3A5200B0B9CC /* UseCaseLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C4A1E1C3A5200B0B9CC /* UseCaseLocator.swift */; };
+		73236C4B1E1C3A5200B0B9CC /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C4A1E1C3A5200B0B9CC /* UseCase.swift */; };
 		73236C4E1E1C3B4B00B0B9CC /* SyncAppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73236C4D1E1C3B4B00B0B9CC /* SyncAppData.swift */; };
 		73276F4F1E1F295F00BC2B4F /* AppTableListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F4E1E1F295F00BC2B4F /* AppTableListView.swift */; };
 		73276F511E1F296E00BC2B4F /* AppGridListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F501E1F296E00BC2B4F /* AppGridListView.swift */; };
-		73276F531E1F380A00BC2B4F /* AppSegueID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F521E1F380A00BC2B4F /* AppSegueID.swift */; };
 		73276F561E1F51D200BC2B4F /* AppGridListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73276F551E1F51D200BC2B4F /* AppGridListViewCell.xib */; };
 		73276F581E1FE53800BC2B4F /* AppCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */; };
 		73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F591E1FE62E00BC2B4F /* AppCategoriesViewModel.swift */; };
 		73276F5C1E200E7200BC2B4F /* AppDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */; };
 		735B477E1E1DD6C500EB3D13 /* GetAppDetailsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B477D1E1DD6C500EB3D13 /* GetAppDetailsTest.swift */; };
-		735B47801E1DE08100EB3D13 /* UseCaseLocatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B477F1E1DE08100EB3D13 /* UseCaseLocatorTest.swift */; };
 		735B47841E1DE5B000EB3D13 /* AppListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B47831E1DE5B000EB3D13 /* AppListViewModel.swift */; };
 		735B47861E1DE60400EB3D13 /* AppSyncViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B47851E1DE60400EB3D13 /* AppSyncViewModel.swift */; };
 		735B47881E1DE62700EB3D13 /* AppDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735B47871E1DE62700EB3D13 /* AppDetailsViewModel.swift */; };
@@ -50,7 +55,6 @@
 		73603BA21E1D70E40016C6F2 /* AppsRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73603BA01E1D708B0016C6F2 /* AppsRepositoryTest.swift */; };
 		73E71E6D1E207B74004B6DFD /* CoreDataAppsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */; };
 		73E71E701E207E3D004B6DFD /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73E71E6E1E207E3D004B6DFD /* CoreDataModel.xcdatamodeld */; };
-		73FC6AC41E1CC0D30086D09B /* UseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC6AC31E1CC0D30086D09B /* UseCaseImpl.swift */; };
 		73FC6AC61E1CC1A40086D09B /* SyncAppDataImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC6AC51E1CC1A40086D09B /* SyncAppDataImpl.swift */; };
 		D83E5539839A578FA67F1D78 /* Pods_AppStoreExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F960678015030BDC8D5C7B1F /* Pods_AppStoreExampleTests.framework */; };
 /* End PBXBuildFile section */
@@ -65,11 +69,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		66816DF12469E2B100206215 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		29A76F955CCCEAD04F851A52 /* Pods-AppStoreExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExampleTests/Pods-AppStoreExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		2B3118DD56BC020EA4B1BF1D /* Pods-AppStoreExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.release.xcconfig"; sourceTree = "<group>"; };
 		3102283A65DF6DE25CD66B88 /* Pods_AppStoreExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54FAB44973C9E42BB27491A3 /* Pods-AppStoreExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExample/Pods-AppStoreExample.debug.xcconfig"; sourceTree = "<group>"; };
+		66816D812460923D00206215 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		66816D83246092AA00206215 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		66816D852460B4AD00206215 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		66816D872460E0FD00206215 /* AppBoundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBoundary.swift; sourceTree = "<group>"; };
+		66816D892460E4AC00206215 /* SceneAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAppDelegate.swift; sourceTree = "<group>"; };
+		66816D8B2461D02D00206215 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		73160B191E1DA88800652C99 /* ListAppsImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsImpl.swift; path = Core/UseCases/Implementations/ListAppsImpl.swift; sourceTree = "<group>"; };
 		73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCategoriesImpl.swift; path = Core/UseCases/Implementations/ListCategoriesImpl.swift; sourceTree = "<group>"; };
 		73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListAppsTest.swift; path = UseCases/ListAppsTest.swift; sourceTree = "<group>"; };
@@ -90,17 +113,15 @@
 		73236C441E1C387900B0B9CC /* AppsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppsRepository.swift; path = Core/Services/AppsRepository.swift; sourceTree = "<group>"; };
 		73236C461E1C38E500B0B9CC /* ListApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListApps.swift; path = Core/UseCases/ListApps.swift; sourceTree = "<group>"; };
 		73236C481E1C390D00B0B9CC /* ListCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ListCategories.swift; path = Core/UseCases/ListCategories.swift; sourceTree = "<group>"; };
-		73236C4A1E1C3A5200B0B9CC /* UseCaseLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCaseLocator.swift; path = Core/UseCaseLocator.swift; sourceTree = "<group>"; };
+		73236C4A1E1C3A5200B0B9CC /* UseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCase.swift; path = Core/UseCase.swift; sourceTree = "<group>"; };
 		73236C4D1E1C3B4B00B0B9CC /* SyncAppData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncAppData.swift; path = Core/UseCases/SyncAppData.swift; sourceTree = "<group>"; };
 		73276F4E1E1F295F00BC2B4F /* AppTableListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppTableListView.swift; path = Views/AppTableListView.swift; sourceTree = "<group>"; };
 		73276F501E1F296E00BC2B4F /* AppGridListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppGridListView.swift; path = Views/AppGridListView.swift; sourceTree = "<group>"; };
-		73276F521E1F380A00BC2B4F /* AppSegueID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSegueID.swift; path = Views/AppSegueID.swift; sourceTree = "<group>"; };
 		73276F551E1F51D200BC2B4F /* AppGridListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AppGridListViewCell.xib; path = Views/AppGridListViewCell.xib; sourceTree = "<group>"; };
 		73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCategoriesViewController.swift; path = Views/AppCategoriesViewController.swift; sourceTree = "<group>"; };
 		73276F591E1FE62E00BC2B4F /* AppCategoriesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppCategoriesViewModel.swift; path = ViewModels/AppCategoriesViewModel.swift; sourceTree = "<group>"; };
 		73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDetailsViewController.swift; path = Views/AppDetailsViewController.swift; sourceTree = "<group>"; };
 		735B477D1E1DD6C500EB3D13 /* GetAppDetailsTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetAppDetailsTest.swift; path = UseCases/GetAppDetailsTest.swift; sourceTree = "<group>"; };
-		735B477F1E1DE08100EB3D13 /* UseCaseLocatorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCaseLocatorTest.swift; path = UseCases/UseCaseLocatorTest.swift; sourceTree = "<group>"; };
 		735B47831E1DE5B000EB3D13 /* AppListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppListViewModel.swift; path = ViewModels/AppListViewModel.swift; sourceTree = "<group>"; };
 		735B47851E1DE60400EB3D13 /* AppSyncViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppSyncViewModel.swift; path = ViewModels/AppSyncViewModel.swift; sourceTree = "<group>"; };
 		735B47871E1DE62700EB3D13 /* AppDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDetailsViewModel.swift; path = ViewModels/AppDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -116,7 +137,6 @@
 		73603BA01E1D708B0016C6F2 /* AppsRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppsRepositoryTest.swift; path = Services/AppsRepositoryTest.swift; sourceTree = "<group>"; };
 		73E71E6C1E207B74004B6DFD /* CoreDataAppsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataAppsRepository.swift; path = Core/Services/Adapters/CoreDataAppsRepository.swift; sourceTree = "<group>"; };
 		73E71E6F1E207E3D004B6DFD /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		73FC6AC31E1CC0D30086D09B /* UseCaseImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UseCaseImpl.swift; path = Core/UseCases/Implementations/UseCaseImpl.swift; sourceTree = "<group>"; };
 		73FC6AC51E1CC1A40086D09B /* SyncAppDataImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SyncAppDataImpl.swift; path = Core/UseCases/Implementations/SyncAppDataImpl.swift; sourceTree = "<group>"; };
 		F960678015030BDC8D5C7B1F /* Pods_AppStoreExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppStoreExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF8C2335DF8E18544799DAA1 /* Pods-AppStoreExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStoreExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AppStoreExampleTests/Pods-AppStoreExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66816DF8246A73FC00206215 /* Boundaries in Frameworks */,
 				47E82369792B40C3DAB1B5A3 /* Pods_AppStoreExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,7 +189,9 @@
 				73236C3E1E1C375100B0B9CC /* Core */,
 				73236C511E1C3E8200B0B9CC /* ViewModels */,
 				73236C521E1C3EA200B0B9CC /* Views */,
+				66816D872460E0FD00206215 /* AppBoundary.swift */,
 				73236C1C1E1C334F00B0B9CC /* AppDelegate.swift */,
+				66816D892460E4AC00206215 /* SceneAppDelegate.swift */,
 				73236C201E1C334F00B0B9CC /* Main.storyboard */,
 				73236C231E1C334F00B0B9CC /* Assets.xcassets */,
 				73236C251E1C334F00B0B9CC /* LaunchScreen.storyboard */,
@@ -195,7 +218,6 @@
 				73236C3F1E1C375900B0B9CC /* Entities */,
 				73236C411E1C382A00B0B9CC /* Services */,
 				73236C401E1C382000B0B9CC /* UseCases */,
-				73236C4A1E1C3A5200B0B9CC /* UseCaseLocator.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -204,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				731C9B2E1E1C71BC00B3C5B9 /* AppData.swift */,
+				66816D8B2461D02D00206215 /* Entity.swift */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -216,6 +239,7 @@
 				73236C461E1C38E500B0B9CC /* ListApps.swift */,
 				73236C481E1C390D00B0B9CC /* ListCategories.swift */,
 				73236C4D1E1C3B4B00B0B9CC /* SyncAppData.swift */,
+				73236C4A1E1C3A5200B0B9CC /* UseCase.swift */,
 			);
 			name = UseCases;
 			sourceTree = "<group>";
@@ -226,6 +250,7 @@
 				73236C4F1E1C3D2100B0B9CC /* Adapters */,
 				73236C421E1C386900B0B9CC /* AppStoreService.swift */,
 				73236C441E1C387900B0B9CC /* AppsRepository.swift */,
+				66816D812460923D00206215 /* Service.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -248,7 +273,6 @@
 				73160B191E1DA88800652C99 /* ListAppsImpl.swift */,
 				73160B1B1E1DA99900652C99 /* ListCategoriesImpl.swift */,
 				73FC6AC51E1CC1A40086D09B /* SyncAppDataImpl.swift */,
-				73FC6AC31E1CC0D30086D09B /* UseCaseImpl.swift */,
 			);
 			name = Implementation;
 			sourceTree = "<group>";
@@ -261,6 +285,7 @@
 				735B47831E1DE5B000EB3D13 /* AppListViewModel.swift */,
 				735B47851E1DE60400EB3D13 /* AppSyncViewModel.swift */,
 				735B47891E1DE67E00EB3D13 /* AppThumbnailViewModel.swift */,
+				66816D83246092AA00206215 /* ViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -269,21 +294,13 @@
 			isa = PBXGroup;
 			children = (
 				735B478F1E1EEB1B00EB3D13 /* ListViews */,
-				73276F541E1F384800BC2B4F /* Segues */,
 				73276F571E1FE53800BC2B4F /* AppCategoriesViewController.swift */,
 				73276F5B1E200E7200BC2B4F /* AppDetailsViewController.swift */,
 				735B478D1E1ED6B200EB3D13 /* AppListViewController.swift */,
 				735B478B1E1EA55D00EB3D13 /* AppSyncViewController.swift */,
+				66816D852460B4AD00206215 /* View.swift */,
 			);
 			name = Views;
-			sourceTree = "<group>";
-		};
-		73276F541E1F384800BC2B4F /* Segues */ = {
-			isa = PBXGroup;
-			children = (
-				73276F521E1F380A00BC2B4F /* AppSegueID.swift */,
-			);
-			name = Segues;
 			sourceTree = "<group>";
 		};
 		73465A731E2096D8008C2A35 /* CoreDataModel */ = {
@@ -321,7 +338,6 @@
 				73160B1D1E1DB9FD00652C99 /* ListAppsTest.swift */,
 				73160B231E1DD28600652C99 /* ListCategoriesTest.swift */,
 				73603B9B1E1D59F90016C6F2 /* SyncAppDataTest.swift */,
-				735B477F1E1DE08100EB3D13 /* UseCaseLocatorTest.swift */,
 			);
 			name = UseCases;
 			sourceTree = "<group>";
@@ -374,12 +390,16 @@
 				73236C161E1C334E00B0B9CC /* Frameworks */,
 				73236C171E1C334E00B0B9CC /* Resources */,
 				876994BF788A27BD5B2FB56C /* [CP] Embed Pods Frameworks */,
+				66816DF12469E2B100206215 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = AppStoreExample;
+			packageProductDependencies = (
+				66816DF7246A73FC00206215 /* Boundaries */,
+			);
 			productName = AppStoreExample;
 			productReference = 73236C191E1C334F00B0B9CC /* AppStoreExample.app */;
 			productType = "com.apple.product-type.application";
@@ -436,6 +456,9 @@
 				Base,
 			);
 			mainGroup = 73236C101E1C334E00B0B9CC;
+			packageReferences = (
+				66816DF6246A73FC00206215 /* XCRemoteSwiftPackageReference "Boundaries" */,
+			);
 			productRefGroup = 73236C1A1E1C334F00B0B9CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -536,16 +559,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				73603B981E1D452A0016C6F2 /* MockAppStoreService.swift in Sources */,
+				66816D8A2460E4AC00206215 /* SceneAppDelegate.swift in Sources */,
 				73160B1C1E1DA99900652C99 /* ListCategoriesImpl.swift in Sources */,
 				73E71E701E207E3D004B6DFD /* CoreDataModel.xcdatamodeld in Sources */,
 				735B478E1E1ED6B200EB3D13 /* AppListViewController.swift in Sources */,
 				73236C4E1E1C3B4B00B0B9CC /* SyncAppData.swift in Sources */,
+				66816D882460E0FD00206215 /* AppBoundary.swift in Sources */,
 				735B478A1E1DE67E00EB3D13 /* AppThumbnailViewModel.swift in Sources */,
-				73FC6AC41E1CC0D30086D09B /* UseCaseImpl.swift in Sources */,
+				66816D84246092AA00206215 /* ViewModel.swift in Sources */,
 				731C9B2D1E1C6E9C00B3C5B9 /* ItunesWebService.swift in Sources */,
-				73236C4B1E1C3A5200B0B9CC /* UseCaseLocator.swift in Sources */,
+				73236C4B1E1C3A5200B0B9CC /* UseCase.swift in Sources */,
+				66816D822460923D00206215 /* Service.swift in Sources */,
 				73276F5C1E200E7200BC2B4F /* AppDetailsViewController.swift in Sources */,
 				73236C451E1C387900B0B9CC /* AppsRepository.swift in Sources */,
+				66816D862460B4AD00206215 /* View.swift in Sources */,
 				735B47841E1DE5B000EB3D13 /* AppListViewModel.swift in Sources */,
 				73276F5A1E1FE62E00BC2B4F /* AppCategoriesViewModel.swift in Sources */,
 				735B47861E1DE60400EB3D13 /* AppSyncViewModel.swift in Sources */,
@@ -557,6 +584,7 @@
 				735B47911E1EEB2F00EB3D13 /* AppListView.swift in Sources */,
 				735B47881E1DE62700EB3D13 /* AppDetailsViewModel.swift in Sources */,
 				73236C491E1C390D00B0B9CC /* ListCategories.swift in Sources */,
+				66816D8C2461D02D00206215 /* Entity.swift in Sources */,
 				73276F581E1FE53800BC2B4F /* AppCategoriesViewController.swift in Sources */,
 				73160B201E1DBC4300652C99 /* GetAppDetails.swift in Sources */,
 				73603B9A1E1D46780016C6F2 /* InMemoryAppsRepository.swift in Sources */,
@@ -567,7 +595,6 @@
 				735B478C1E1EA55D00EB3D13 /* AppSyncViewController.swift in Sources */,
 				731C9B2F1E1C71BC00B3C5B9 /* AppData.swift in Sources */,
 				73603B9E1E1D6BFC0016C6F2 /* MockAppsRepository.swift in Sources */,
-				73276F531E1F380A00BC2B4F /* AppSegueID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,7 +608,6 @@
 				73603B9C1E1D59F90016C6F2 /* SyncAppDataTest.swift in Sources */,
 				73160B241E1DD28600652C99 /* ListCategoriesTest.swift in Sources */,
 				73603B951E1D44320016C6F2 /* ItunesWebServiceTest.swift in Sources */,
-				735B47801E1DE08100EB3D13 /* UseCaseLocatorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +746,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -730,12 +757,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54FAB44973C9E42BB27491A3 /* Pods-AppStoreExample.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X56NW62SRZ;
 				INFOPLIST_FILE = AppStoreExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.valbuena.AppStoreExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -746,12 +775,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B3118DD56BC020EA4B1BF1D /* Pods-AppStoreExample.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X56NW62SRZ;
 				INFOPLIST_FILE = AppStoreExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.valbuena.AppStoreExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -768,7 +799,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AppStoreExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.valbuena.AppStoreExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -787,7 +822,11 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = AppStoreExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.frank.valbuena.AppStoreExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -826,6 +865,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66816DF6246A73FC00206215 /* XCRemoteSwiftPackageReference "Boundaries" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/frankvalbuena/Boundaries";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66816DF7246A73FC00206215 /* Boundaries */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66816DF6246A73FC00206215 /* XCRemoteSwiftPackageReference "Boundaries" */;
+			productName = Boundaries;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		73E71E6E1E207E3D004B6DFD /* CoreDataModel.xcdatamodeld */ = {

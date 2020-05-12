@@ -11,14 +11,14 @@ import UIKit
 
 // MARK: - Cell
 
-class AppGridListViewCell: UICollectionViewCell, AppListCell {
+final class AppGridListViewCell: UICollectionViewCell, AppListCell {
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var iconImageView: UIImageView?
 }
 
 // MARK: - AppGridListView
 
-class AppGridListView: UICollectionView {
+final class AppGridListView: UICollectionView {
     fileprivate static let cellId = "AppListCellID"
     weak var listDelegate: AppListViewDelegate?
     

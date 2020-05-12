@@ -9,8 +9,6 @@
 import Foundation
 
 final class AppListViewModel {
-    fileprivate let locator: UseCaseLocatorProtocol
-    
     var selectedCategory: String? = nil {
         didSet { updateThumbnails() }
     }
@@ -21,8 +19,12 @@ final class AppListViewModel {
     var thumbnails: AnyCollection<AppThumbnailViewModel> = AnyCollection([])
     var onListDidChange: (() -> Void)? = nil
     
-    init(locator: UseCaseLocatorProtocol) {
-        self.locator = locator
+    private let syncAppData: SyncAppData
+    private let listApps: ListApps
+    
+    init(syncAppData: SyncAppData, listApps: ListApps) {
+        self.syncAppData = syncAppData
+        self.listApps = listApps
         updateWarning()
         updateThumbnails()
     }
@@ -30,11 +32,10 @@ final class AppListViewModel {
 
 private extension AppListViewModel {
     func updateWarning() {
-        guard let sync = locator.getUseCase(ofType: SyncAppData.self),
-               let lastSyncResult = sync.lastSyncResult
-        else {
+        guard let lastSyncResult = syncAppData.lastSyncResult else {
             return
         }
+        
         switch lastSyncResult {
         case .success:
             warningMessage = nil
@@ -46,19 +47,15 @@ private extension AppListViewModel {
     }
     
     func updateThumbnails() {
-        guard let list = locator.getUseCase(ofType: ListApps.self) else {
-            return
-        }
         if let selectedCategory = self.selectedCategory {
-            thumbnails = AnyCollection(list.listApps(byCategory: selectedCategory).lazy.map {
+            thumbnails = AnyCollection(listApps.listApps(byCategory: selectedCategory).lazy.map {
                 AppThumbnailViewModel(thumbnail: $0)
             })
         } else {
-            thumbnails = AnyCollection(list.listAllApps().lazy.map {
+            thumbnails = AnyCollection(listApps.listAllApps().lazy.map {
                 AppThumbnailViewModel(thumbnail: $0)
             })
         }
         onListDidChange?()
     }
 }
-

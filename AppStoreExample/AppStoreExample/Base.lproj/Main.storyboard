@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BCr-mU-m8l">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="eK5-Ss-6cB">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="BCr-mU-m8l" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3as-iG-NhR">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="mpv-KC-g7B" kind="relationship" relationship="rootViewController" id="0zr-Pz-E8X"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rGF-LW-Im8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-793" y="193"/>
-        </scene>
         <!--App Sync View Controller-->
         <scene sceneID="q4j-dw-HGd">
             <objects>
-                <viewController id="mpv-KC-g7B" customClass="AppSyncViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppSyncViewController" id="mpv-KC-g7B" customClass="AppSyncViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T1E-sY-lbO"/>
                         <viewControllerLayoutGuide type="bottom" id="z6p-5R-Dzm"/>
@@ -89,7 +74,6 @@
                         <outlet property="errorLabel" destination="lyW-Lf-HCN" id="ntS-gq-RQg"/>
                         <outlet property="retryButton" destination="pVQ-dc-FiW" id="g4g-Uk-VYz"/>
                         <outlet property="retryContainerView" destination="o08-zz-iJ8" id="z6L-M2-MBE"/>
-                        <segue destination="uJn-OT-p66" kind="show" identifier="showList" id="kgz-Q1-Psj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qxz-BI-wNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,7 +83,7 @@
         <!--showDetail-->
         <scene sceneID="UqF-Wc-i3i">
             <objects>
-                <viewController title="showDetail" id="uJn-OT-p66" customClass="AppListViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AppListViewController" title="showDetail" id="uJn-OT-p66" customClass="AppListViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="siM-4L-I5H"/>
                         <viewControllerLayoutGuide type="bottom" id="ehZ-WM-sQ1"/>
@@ -153,7 +137,6 @@
                     <connections>
                         <outlet property="categoriesButton" destination="20t-jU-zFZ" id="fH8-kv-4QX"/>
                         <outlet property="listContainerView" destination="M41-QA-2Y9" id="kmZ-ct-BM9"/>
-                        <segue destination="OVu-fq-oF9" kind="presentation" identifier="showDetail" modalPresentationStyle="formSheet" id="plO-fp-qRw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q46-H3-I0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -163,9 +146,9 @@
         <!--App Details View Controller-->
         <scene sceneID="kz6-E5-iHB">
             <objects>
-                <tableViewController id="jWB-DN-vLj" customClass="AppDetailsViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AppDetailsViewController" id="jWB-DN-vLj" customClass="AppDetailsViewController" customModule="AppStoreExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="120" sectionHeaderHeight="28" sectionFooterHeight="28" id="UvL-oM-5oQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -335,22 +318,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5xR-w0-8h4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2926.875" y="219.71830985915494"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="sYc-9n-BbQ">
-            <objects>
-                <navigationController id="OVu-fq-oF9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mvk-ow-1JV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="jWB-DN-vLj" kind="relationship" relationship="rootViewController" id="I6F-f2-F7U"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q1I-43-FGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2072" y="220"/>
         </scene>
     </scenes>
 </document>

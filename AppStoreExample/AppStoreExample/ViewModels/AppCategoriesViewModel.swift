@@ -10,28 +10,30 @@ import Foundation
 
 final class AppCategoriesViewModel {
     static let allApps = "All Apps"
-    fileprivate let locator: UseCaseLocatorProtocol
     
-    let title: String
+    private let listCategories: ListCategories
+    
+    let title: String = "Categories"
     lazy var categories: [String] = {
-        guard let useCase = self.locator.getUseCase(ofType: ListCategories.self) else {
-            return []
-        }
-        return [type(of: self).allApps] + useCase.listAll()
+        return [type(of: self).allApps] + listCategories.listAll()
     }()
-    var selectedCategory: String? = nil {
+    var selectedCategory: String? {
         didSet {
             if selectedCategory == type(of: self).allApps {
                 selectedCategory = nil
             }
             
-            onDidChangeSelectedCategory?()
+            onDidChangeSelectedCategory?(selectedCategory)
         }
     }
-    var onDidChangeSelectedCategory: (() -> Void)? = nil
+    var onDidChangeSelectedCategory: ((String?) -> Void)? = nil
     
-    init(locator: UseCaseLocatorProtocol) {
-        self.locator = locator
-        self.title = "Categories"
+    init(listCategories: ListCategories,
+         selectedCategory: String?,
+         onDidChangeSelectedCategory: ((String?) -> Void)?)
+    {
+        self.listCategories = listCategories
+        self.selectedCategory = selectedCategory
+        self.onDidChangeSelectedCategory = onDidChangeSelectedCategory
     }
 }
