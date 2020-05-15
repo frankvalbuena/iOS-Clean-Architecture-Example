@@ -15,6 +15,6 @@ struct AppThumbnailDTO {
 }
 
 protocol ListApps {
-    func listAllApps() -> AnyCollection<AppThumbnailDTO>
-    func listApps(byCategory: String) -> AnyCollection<AppThumbnailDTO>
+    func callAsFunction() -> AnyCollection<AppThumbnailDTO>
+    func callAsFunction(byCategory: String) -> AnyCollection<AppThumbnailDTO>
 }

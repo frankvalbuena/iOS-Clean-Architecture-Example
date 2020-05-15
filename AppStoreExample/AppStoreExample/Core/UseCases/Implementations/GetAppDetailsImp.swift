@@ -15,7 +15,7 @@ final class GetAppDetailsImpl: GetAppDetails {
         self.repository = repository
     }
     
-    func getDetails(appstoreId: String) -> AppDetailsDTO? {
+    func callAsFunction(appstoreId: String) -> AppDetailsDTO? {
         guard let app = repository.findApp(appstoreId: appstoreId) else {
             return nil
         }

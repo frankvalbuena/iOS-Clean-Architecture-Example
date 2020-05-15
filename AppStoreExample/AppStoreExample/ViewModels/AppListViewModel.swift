@@ -48,11 +48,11 @@ private extension AppListViewModel {
     
     func updateThumbnails() {
         if let selectedCategory = self.selectedCategory {
-            thumbnails = AnyCollection(listApps.listApps(byCategory: selectedCategory).lazy.map {
+            thumbnails = AnyCollection(listApps(byCategory: selectedCategory).lazy.map {
                 AppThumbnailViewModel(thumbnail: $0)
             })
         } else {
-            thumbnails = AnyCollection(listApps.listAllApps().lazy.map {
+            thumbnails = AnyCollection(listApps().lazy.map {
                 AppThumbnailViewModel(thumbnail: $0)
             })
         }

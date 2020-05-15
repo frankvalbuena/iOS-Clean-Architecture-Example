@@ -22,5 +22,5 @@ protocol SyncAppData {
     var lastSyncResult: SyncResult? { get }
     var hasCachedData: Bool { get }
     
-    func sync(_ completion: @escaping (SyncResult) -> ())
+    func callAsFunction(_ completion: @escaping (SyncResult) -> ())
 }

@@ -15,12 +15,12 @@ final class ListAppsImpl: ListApps {
         self.repository = repository
     }
     
-    func listAllApps() -> AnyCollection<AppThumbnailDTO> {
+    func callAsFunction() -> AnyCollection<AppThumbnailDTO> {
         let lazyThumbnails = repository.listAllApps().lazy.map(ListAppsImpl.buildThumbnail)
         return AnyCollection(lazyThumbnails)
     }
     
-    func listApps(byCategory category: String) -> AnyCollection<AppThumbnailDTO> {
+    func callAsFunction(byCategory category: String) -> AnyCollection<AppThumbnailDTO> {
         let lazyThumbnails = repository.listApps(byCategory: category).lazy.map(ListAppsImpl.buildThumbnail)
         return AnyCollection(lazyThumbnails)
     }

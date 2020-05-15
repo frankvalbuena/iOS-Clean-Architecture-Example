@@ -20,5 +20,5 @@ struct AppDetailsDTO {
 }
 
 protocol GetAppDetails {
-    func getDetails(appstoreId: String) -> AppDetailsDTO?
+    func callAsFunction(appstoreId: String) -> AppDetailsDTO?
 }

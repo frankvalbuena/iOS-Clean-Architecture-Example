@@ -28,7 +28,7 @@ final class SyncAppDataImpl: SyncAppData {
         return SyncAppDataImpl.lastSyncResult
     }
     
-    func sync(_ completion: @escaping (SyncResult) -> ()) {
+    func callAsFunction(_ completion: @escaping (SyncResult) -> ()) {
         let repository = self.repository
         func onDidComplete(result: SyncResult) {
             SyncAppDataImpl.lastSyncResult = result

@@ -28,7 +28,7 @@ final class AppSyncViewModel {
     
     func startSync() {
         appSyncState = .syncing
-        syncAppData.sync { [weak self] result in
+        syncAppData { [weak self] result in
             guard let self = self else {
                 return
             }

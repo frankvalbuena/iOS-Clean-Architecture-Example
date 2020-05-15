@@ -15,7 +15,7 @@ final class ListCategoriesImpl: ListCategories {
         self.repository = repository
     }
     
-    func listAll() -> [String] {
+    func callAsFunction() -> [String] {
         return repository.listCategories()
     }
 }

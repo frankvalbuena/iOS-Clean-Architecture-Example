@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ListCategories {
-    func listAll() -> [String]
+    func callAsFunction() -> [String]
 }

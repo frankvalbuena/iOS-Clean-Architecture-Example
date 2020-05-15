@@ -20,7 +20,7 @@ final class AppDetailsViewModel {
     private let imageDownloader = ImageDownloader()
     
     init(appID: String, getAppDetails: GetAppDetails) {
-        guard let details = getAppDetails.getDetails(appstoreId: appID) else {
+        guard let details = getAppDetails(appstoreId: appID) else {
             self.name = ""
             self.summary = ""
             self.additionalInformation = []
@@ -34,12 +34,13 @@ final class AppDetailsViewModel {
                                       (type: "Release Date:", value: details.releaseDate),
                                       (type: "Rights:", value: details.rights)]
         
-        if let bannerURL = details.bannerURL {
-            imageDownloader.download(URLRequest(url: bannerURL)) { [weak self] response in
-                if case .success(let image) = response.result {
-                    self?.banner = image
-                    self?.onBannerLoaded?()
-                }
+        guard let bannerURL = details.bannerURL else {
+            return
+        }
+        self.imageDownloader.download(URLRequest(url: bannerURL)) { [weak self] response in
+            if case .success(let image) = response.result {
+                self?.banner = image
+                self?.onBannerLoaded?()
             }
         }
     }

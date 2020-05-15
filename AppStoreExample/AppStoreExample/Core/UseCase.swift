@@ -9,10 +9,6 @@
 import Foundation
 import Boundaries
 
-protocol UseCaseLocatorProtocol {
-    func getUseCase<T>(ofType type: T.Type) -> T?
-}
-
 final class UseCase: Boundary {
     struct Plugins: PluginBoundary {
         var repository: InputPort<AppsRepository>

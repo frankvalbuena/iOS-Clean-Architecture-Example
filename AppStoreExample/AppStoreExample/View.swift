@@ -16,8 +16,7 @@ final class View: Boundary {
     let storyboard: UIStoryboard = .init(name: "Main", bundle: nil)
     
     var rootViewController: InputPort<UIViewController?> {
-        let identifier = "\(AppSyncViewController.self)"
-        let syncVC = storyboard.instantiateViewController(identifier: identifier) { [weak self] coder in
+        let syncVC = self.instantiateViewController { [weak self] coder -> AppSyncViewController? in
             guard let self = self else { fatalError("Component must be retained") }
             return AppSyncViewController(viewModel: self.dependencies.appSyncViewModel,
                                          appList: self.appListViewController,
@@ -28,9 +27,8 @@ final class View: Boundary {
     
     typealias AppList = Factory<Void, UIViewController?>
     var appListViewController: AppList {
-        let identifier = "\(AppListViewController.self)"
         return AppList { [weak self] in
-            return self?.storyboard.instantiateViewController(identifier: identifier) { [weak self] coder in
+            return self?.instantiateViewController { [weak self] coder -> AppListViewController? in
                 guard let self = self else { fatalError("Component must be retained") }
                 return AppListViewController(viewModel: self.dependencies.appListViewModel,
                                              details: self.appDetailsViewController,
@@ -45,8 +43,7 @@ final class View: Boundary {
         return Details { [weak self] (details) -> UIViewController in
             guard let self = self else { fatalError("Component must be retained") }
             let viewModel = self.dependencies.appDetailsViewModel(configuration: details)
-            let identifier = "\(AppDetailsViewController.self)"
-            let detailsVC = self.storyboard.instantiateViewController(identifier: identifier) { (coder) -> UIViewController? in
+            let detailsVC = self.instantiateViewController { (coder) -> AppDetailsViewController? in
                 AppDetailsViewController(viewModel: viewModel, coder: coder)
             }
             return UINavigationController(rootViewController: detailsVC)
@@ -59,6 +56,15 @@ final class View: Boundary {
             guard let self = self else { fatalError("Component must be retained") }
             let viewModel = self.dependencies.categoriesViewModel(configuration: categories)
             return AppCategoriesViewController(viewModel: viewModel)
+        }
+    }
+}
+
+private extension View {
+    func instantiateViewController<T: UIViewController>(construction: @escaping (NSCoder) -> T?) -> UIViewController {
+        let identifier = String(describing: T.self)
+        return self.storyboard.instantiateViewController(identifier: identifier) { (coder) -> UIViewController? in
+            construction(coder)
         }
     }
 }

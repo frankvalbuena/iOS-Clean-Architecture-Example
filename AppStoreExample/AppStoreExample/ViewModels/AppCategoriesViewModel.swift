@@ -15,7 +15,7 @@ final class AppCategoriesViewModel {
     
     let title: String = "Categories"
     lazy var categories: [String] = {
-        return [type(of: self).allApps] + listCategories.listAll()
+        return [type(of: self).allApps] + listCategories()
     }()
     var selectedCategory: String? {
         didSet {
