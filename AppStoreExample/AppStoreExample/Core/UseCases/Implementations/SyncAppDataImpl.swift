@@ -2,8 +2,8 @@
 //  SyncAppDataImpl.swift
 //  AppStoreExample
 //
-//  Created by Francisco Valbuena on 1/4/17.
-//  Copyright © 2017 Francisco Valbuena. All rights reserved.
+//  Created by Frank Valbuena on 1/4/17.
+//  Copyright © 2017 Frank Valbuena. All rights reserved.
 //
 
 import Foundation
@@ -35,7 +35,7 @@ final class SyncAppDataImpl: SyncAppData {
             completion(result)
         }
         
-        service.retrieveTopFreeApps(count: SyncAppDataImpl.numberOfAppsToSync) {
+        service.retrieveTopFreeApps(count: Self.numberOfAppsToSync) {
             switch $0 {
             case .success(let apps):
                 repository.removeAllApps()

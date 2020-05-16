@@ -2,15 +2,15 @@
 //  CoreDataAppsRepository.swift
 //  AppStoreExample
 //
-//  Created by Francisco Valbuena on 1/6/17.
-//  Copyright © 2017 Francisco Valbuena. All rights reserved.
+//  Created by Frank Valbuena on 1/6/17.
+//  Copyright © 2017 Frank Valbuena. All rights reserved.
 //
 
 import Foundation
 import CoreData
 import MagicalRecord
 
-public class AppSyncDataEntity: NSManagedObject {
+public final class AppSyncDataEntity: NSManagedObject {
     @NSManaged public var a_appstoreID: String?
     @NSManaged public var a_artist: String?
     @NSManaged public var a_bannerURL: String?
@@ -38,7 +38,7 @@ extension AppSyncDataEntity: AppData {
     var rank: Int { return a_rank!.intValue }
 }
 
-class CoreDataAppsRepository: AppsRepository {
+final class CoreDataAppsRepository: AppsRepository {
     var lastSyncDate: Date? {
         get { return UserDefaults.standard.value(forKey:"lastSyncDate") as? Date }
         set(value) { UserDefaults.standard.set(value, forKey: "lastSyncDate") }

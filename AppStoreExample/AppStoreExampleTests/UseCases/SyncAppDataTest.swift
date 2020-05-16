@@ -2,8 +2,8 @@
 //  SyncAppDataTest.swift
 //  AppStoreExample
 //
-//  Created by Francisco Valbuena on 1/4/17.
-//  Copyright © 2017 Francisco Valbuena. All rights reserved.
+//  Created by Frank Valbuena on 1/4/17.
+//  Copyright © 2017 Frank Valbuena. All rights reserved.
 //
 
 import XCTest
@@ -53,7 +53,7 @@ final class SyncAppDataTest: XCTestCase {
         let mockApp = RawAppData(appstoreID: "123456",
                                  shortName: "Short Name",
                                  detailName: "Complete Name",
-                                 artist: "Francisco Valbuena",
+                                 artist: "Frank Valbuena",
                                  category: "Mock Apps",
                                  releaseDate: "1/4/17",
                                  summary: "This is a Mock app for testing",
