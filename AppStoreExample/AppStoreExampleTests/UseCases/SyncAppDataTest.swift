@@ -12,23 +12,23 @@ import XCTest
 final class SyncAppDataTest: XCTestCase {
     var service: MockAppStoreService!
     var repository: MockAppsRepository!
-    var syncUseCase: SyncAppDataImpl!
+    var sut: SyncAppDataImpl!
     
     override func setUpWithError() throws {
         service = MockAppStoreService()
         repository = MockAppsRepository()
-        syncUseCase = SyncAppDataImpl(repository: repository, service: service)
+        sut = SyncAppDataImpl(repository: repository, service: service)
     }
     
     override func tearDownWithError() throws {
         service = nil
         repository = nil
-        syncUseCase = nil
+        sut = nil
     }
     
     func testFailure() {
         service.mockResponse = .notConnectedToInternet
-        syncUseCase.sync { result in
+        sut { result in
             if case .failure = result {
                 print("Good status")
             } else {
@@ -39,7 +39,7 @@ final class SyncAppDataTest: XCTestCase {
     
     func testNotInternetConnection() {
         service.mockResponse = .notConnectedToInternet
-        syncUseCase.sync { (result) in
+        sut { (result) in
             switch result {
             case .failure(error: .notInternetConnection):
                 break
@@ -62,13 +62,13 @@ final class SyncAppDataTest: XCTestCase {
                                  iconURL: URL(string: "http://mock.com/mockIcon.png"),
                                  rank: 0)
         service.mockResponse = .success(apps: [mockApp])
-        syncUseCase.sync { [weak self] result in
+        sut { [weak self] result in
             guard let self = self else {
                 XCTFail("This test is sync given that mocks answer sync")
                 return
             }
             if case .success = result {
-                XCTAssertTrue(self.syncUseCase.hasCachedData, "Data needs to be cached")
+                XCTAssertTrue(self.sut.hasCachedData, "Data needs to be cached")
                 XCTAssertEqual(self.repository.listAllApps().count, 1, "Mock App Saved")
                 XCTAssertTrue(self.repository.removeAllAppsCalled,
                               "Old Data needs to be removed, otherwise rank could be messed up")

@@ -12,10 +12,17 @@ import XCTest
 class AppsRespositoryTest: XCTestCase {
     
     // Add here all the repositories you want to test
-    let repositoriesToTest: [AppsRepository] = [ CoreDataAppsRepository(), InMemoryAppsRepository()]
+    var repositoriesToTest: [AppsRepository]!
     
-    override func tearDown() {
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        repositoriesToTest = [CoreDataAppsRepository(), InMemoryAppsRepository()]
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
         repositoriesToTest.forEach { $0.removeAllApps() }
+        repositoriesToTest = nil
     }
     
     func testSaving() {
@@ -46,7 +53,7 @@ class AppsRespositoryTest: XCTestCase {
         save(apps: [mockApp]) { repository in
             let foundApp = repository.findApp(appstoreId: mockApp.appstoreID)
             
-            XCTAssertNotNil(foundApp, "App must exist")
+            XCTAssertNotNil(foundApp, "App must exist in \(repository)")
             XCTAssertEqual(foundApp?.appstoreID, mockApp.appstoreID, "Must be the same imported app")
         }
     }
@@ -121,6 +128,8 @@ private extension AppsRespositoryTest {
     }
     
     func save(apps: [AppData], success: @escaping (AppsRepository) -> Void) {
+        var expectations: [XCTestExpectation] = []
+        
         repositoriesToTest.forEach { repository in
             let saving = expectation(description: "saving")
             
@@ -133,7 +142,8 @@ private extension AppsRespositoryTest {
                 
                 saving.fulfill()
             }
+            expectations.append(saving)
         }
-        waitForExpectations(timeout: 10, handler: nil)
+        wait(for: expectations, timeout: 2)
     }
 }

@@ -207,7 +207,6 @@
 				73603B921E1D43310016C6F2 /* MockObjects */,
 				73603B901E1D43050016C6F2 /* Services */,
 				73603B911E1D430E0016C6F2 /* UseCases */,
-				73603B931E1D43F20016C6F2 /* ViewModel */,
 			);
 			path = AppStoreExampleTests;
 			sourceTree = "<group>";
@@ -349,13 +348,6 @@
 				73603B9D1E1D6BFC0016C6F2 /* MockAppsRepository.swift */,
 			);
 			name = MockObjects;
-			sourceTree = "<group>";
-		};
-		73603B931E1D43F20016C6F2 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ViewModel;
 			sourceTree = "<group>";
 		};
 		AA45BA4F16FCD40D95DEA6D8 /* Frameworks */ = {

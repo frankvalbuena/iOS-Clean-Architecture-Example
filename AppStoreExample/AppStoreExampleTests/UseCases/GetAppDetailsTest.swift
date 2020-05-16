@@ -10,13 +10,29 @@ import XCTest
 @testable import AppStoreExample
 
 final class GetAppDetailsTest: XCTestCase {
+    var repository: MockAppsRepository!
+    var sut: GetAppDetailsImpl!
+    
+    override func setUpWithError() throws {
+        repository = MockAppsRepository()
+        sut = GetAppDetailsImpl(repository: repository)
+    }
+    
+    override func tearDown() {
+        repository = nil
+        sut = nil
+    }
+    
     func testGetDetails() {
-        let mockRepository = MockAppsRepository()
         let mockApp = buildApp(appstoreId: "1", rank: 1)
         
         let save = expectation(description: "Saving apps")
-        mockRepository.save(apps: [mockApp]) { _ in
-            let details = GetAppDetailsImpl(repository: mockRepository).getDetails(appstoreId: "1")
+        repository.save(apps: [mockApp]) { [weak self] _ in
+            guard let self = self else {
+                XCTFail("Self was deallocated")
+                return
+            }
+            let details = self.sut(appstoreId: "1")
             
             XCTAssertNotNil(details)
             XCTAssertEqual(details!.appstoreID, mockApp.appstoreID, "App 1 comes first")
