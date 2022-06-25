@@ -28,20 +28,16 @@ class ListAppsTest: XCTestCase {
         let app2 = buildApp(appstoreId: "2", rank: 2)
         
         let save = expectation(description: "Saving apps")
-        repository.save(apps: [app1, app2]) { [weak self] _ in
-            guard let self = self else {
-                XCTFail("Self was deallocated")
-                return
-            }
-            let listedApps = self.sut()
-            
-            XCTAssertEqual(listedApps.count, 2, "Two Mock Saved")
-            XCTAssertEqual(listedApps.first!.appstoreID, app1.appstoreID, "App 1 comes first")
-            XCTAssertEqual(listedApps.first!.name, app1.shortName, "input must match output")
-            XCTAssertEqual(listedApps.first!.iconURL, app1.iconURL, "input must match output")
+        repository.save(apps: [app1, app2]) { _ in
             save.fulfill()
         }
         waitForExpectations(timeout: 2, handler: nil)
+        let listedApps = self.sut()
+        
+        XCTAssertEqual(listedApps.count, 2, "Two Mock Saved")
+        XCTAssertEqual(listedApps.first!.appstoreID, app1.appstoreID, "App 1 comes first")
+        XCTAssertEqual(listedApps.first!.name, app1.shortName, "input must match output")
+        XCTAssertEqual(listedApps.first!.iconURL, app1.iconURL, "input must match output")
     }
     
     func testListAppsByCategory() {
@@ -50,21 +46,18 @@ class ListAppsTest: XCTestCase {
         let app3 = buildApp(appstoreId: "3", rank: 3, category: "Category B")
         
         let save = expectation(description: "Saving apps")
-        repository.save(apps: [app1, app2, app3]) { [weak self] _ in
-            guard let self = self else {
-                XCTFail("Self was deallocated")
-                return
-            }
-            let categoryA = self.sut(byCategory: "Category A")
-            let categoryB = self.sut(byCategory: "Category B")
-            
-            XCTAssertEqual(categoryA.count, 2, "Two Mocks saved for Category A")
-            XCTAssertEqual(categoryA.first!.appstoreID, app1.appstoreID, "App 1 comes first")
-            XCTAssertEqual(categoryB.count, 1, "Single mock saved for Category B")
-            XCTAssertEqual(categoryB.first!.appstoreID, app3.appstoreID, "App 3 is of type B")
+        repository.save(apps: [app1, app2, app3]) { _ in
             save.fulfill()
         }
         waitForExpectations(timeout: 2, handler: nil)
+        
+        let categoryA = self.sut(byCategory: "Category A")
+        let categoryB = self.sut(byCategory: "Category B")
+        
+        XCTAssertEqual(categoryA.count, 2, "Two Mocks saved for Category A")
+        XCTAssertEqual(categoryA.first!.appstoreID, app1.appstoreID, "App 1 comes first")
+        XCTAssertEqual(categoryB.count, 1, "Single mock saved for Category B")
+        XCTAssertEqual(categoryB.first!.appstoreID, app3.appstoreID, "App 3 is of type B")
     }
 }
 

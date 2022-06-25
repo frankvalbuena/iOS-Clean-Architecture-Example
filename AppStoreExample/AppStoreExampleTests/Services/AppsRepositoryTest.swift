@@ -16,7 +16,7 @@ class AppsRespositoryTest: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        repositoriesToTest = [CoreDataAppsRepository(), InMemoryAppsRepository()]
+        repositoriesToTest = [InMemoryAppsRepository()]
     }
     
     override func tearDownWithError() throws {
@@ -31,17 +31,20 @@ class AppsRespositoryTest: XCTestCase {
         save(apps: [mockApp]) { repository in
             let apps = repository.listAllApps()
             XCTAssertEqual(apps.count, 1, "Single Mock Saved")
-            print("apps count \(apps.count)")
-            XCTAssertEqual(apps.first!.appstoreID, mockApp.appstoreID, "input must match output")
-            XCTAssertEqual(apps.first!.shortName, mockApp.shortName, "input must match output")
-            XCTAssertEqual(apps.first!.iconURL, mockApp.iconURL, "input must match output")
-            XCTAssertEqual(apps.first!.bannerURL, mockApp.bannerURL, "input must match output")
-            XCTAssertEqual(apps.first!.detailName, mockApp.detailName, "name mus be detailName")
-            XCTAssertEqual(apps.first!.artist, mockApp.artist, "input must match output")
-            XCTAssertEqual(apps.first!.category, mockApp.category, "input must match output")
-            XCTAssertEqual(apps.first!.releaseDate, mockApp.releaseDate, "input must match output")
-            XCTAssertEqual(apps.first!.rights, mockApp.rights, "input must match output")
-            XCTAssertEqual(apps.first!.summary, mockApp.summary, "input must match output")
+            guard let foundApp = apps.first else {
+                XCTFail("App should have been saved.")
+                return
+            }
+            XCTAssertEqual(foundApp.appstoreID, mockApp.appstoreID, "input must match output")
+            XCTAssertEqual(foundApp.shortName, mockApp.shortName, "input must match output")
+            XCTAssertEqual(foundApp.iconURL, mockApp.iconURL, "input must match output")
+            XCTAssertEqual(foundApp.bannerURL, mockApp.bannerURL, "input must match output")
+            XCTAssertEqual(foundApp.detailName, mockApp.detailName, "name mus be detailName")
+            XCTAssertEqual(foundApp.artist, mockApp.artist, "input must match output")
+            XCTAssertEqual(foundApp.category, mockApp.category, "input must match output")
+            XCTAssertEqual(foundApp.releaseDate, mockApp.releaseDate, "input must match output")
+            XCTAssertEqual(foundApp.rights, mockApp.rights, "input must match output")
+            XCTAssertEqual(foundApp.summary, mockApp.summary, "input must match output")
             
             XCTAssertNotNil(repository.lastSyncDate, "Sync date must be set")
         }

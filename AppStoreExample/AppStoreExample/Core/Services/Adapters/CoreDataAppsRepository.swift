@@ -43,7 +43,7 @@ final class CoreDataAppsRepository: AppsRepository {
     private lazy var context: NSManagedObjectContext = .mr_default()
     
     var lastSyncDate: Date? {
-        get { return userDefaults.value(forKey:"lastSyncDate") as? Date }
+        get { return userDefaults.value(forKey: "lastSyncDate") as? Date }
         set(value) { userDefaults.set(value, forKey: "lastSyncDate") }
     }
     

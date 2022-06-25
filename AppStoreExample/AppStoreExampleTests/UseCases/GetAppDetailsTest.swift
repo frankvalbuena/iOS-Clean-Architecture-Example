@@ -27,26 +27,24 @@ final class GetAppDetailsTest: XCTestCase {
         let mockApp = buildApp(appstoreId: "1", rank: 1)
         
         let save = expectation(description: "Saving apps")
-        repository.save(apps: [mockApp]) { [weak self] _ in
-            guard let self = self else {
-                XCTFail("Self was deallocated")
-                return
-            }
-            let details = self.sut(appstoreId: "1")
-            
-            XCTAssertNotNil(details)
-            XCTAssertEqual(details!.appstoreID, mockApp.appstoreID, "App 1 comes first")
-            XCTAssertEqual(details!.name, mockApp.detailName, "input must match output")
-            XCTAssertEqual(details!.bannerURL, mockApp.bannerURL, "input must match output")
-            XCTAssertEqual(details!.artist, mockApp.artist, "input must match output")
-            XCTAssertEqual(details!.category, mockApp.category, "input must match output")
-            XCTAssertEqual(details!.releaseDate, mockApp.releaseDate, "input must match output")
-            XCTAssertEqual(details!.rights, mockApp.rights, "input must match output")
-            XCTAssertEqual(details!.summary, mockApp.summary, "input must match output")
-            
+        repository.save(apps: [mockApp]) { _ in
             save.fulfill()
         }
         waitForExpectations(timeout: 2, handler: nil)
+        
+        guard let details = self.sut(appstoreId: "1") else {
+            XCTFail("This must exist")
+            return
+        }
+        
+        XCTAssertEqual(details.appstoreID, mockApp.appstoreID, "App 1 comes first")
+        XCTAssertEqual(details.name, mockApp.detailName, "input must match output")
+        XCTAssertEqual(details.bannerURL, mockApp.bannerURL, "input must match output")
+        XCTAssertEqual(details.artist, mockApp.artist, "input must match output")
+        XCTAssertEqual(details.category, mockApp.category, "input must match output")
+        XCTAssertEqual(details.releaseDate, mockApp.releaseDate, "input must match output")
+        XCTAssertEqual(details.rights, mockApp.rights, "input must match output")
+        XCTAssertEqual(details.summary, mockApp.summary, "input must match output")
     }
 }
 
