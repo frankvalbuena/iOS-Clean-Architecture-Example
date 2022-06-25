@@ -41,12 +41,12 @@ final class AppThumbnailViewModel {
         icon = downloader.imageCache?.image(withIdentifier: iconURL.absoluteString) ?? placeholderIcon
         // Thubnails are short lived object so it's ok to not use weak self in this case,
         // To make sure we don't miss callbacks.
-        AppThumbnailViewModel.imageDownloader.download(URLRequest(url: iconURL)) { response in
-             if case .success(let image) = response.result {
+        AppThumbnailViewModel.imageDownloader.download(URLRequest(url: iconURL), completion:  { response in
+            if case .success(let image) = response.result {
                 self.icon = image
                 self.onDidLoad?()
             }
-        }
+        })
     }
 }
 

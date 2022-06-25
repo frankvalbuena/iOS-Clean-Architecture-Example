@@ -79,10 +79,15 @@ extension AppGridListView: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AppGridListView.cellId,
-                                                      for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: AppGridListView.cellId,
+            for: indexPath
+        ) as? AppGridListViewCell
+        else {
+            return UICollectionViewCell()
+        }
         
-        listDelegate?.configure(cell: cell as! AppGridListViewCell, atIndex: indexPath.row)
+        listDelegate?.configure(cell: cell, atIndex: indexPath.row)
         return cell
     }
 }

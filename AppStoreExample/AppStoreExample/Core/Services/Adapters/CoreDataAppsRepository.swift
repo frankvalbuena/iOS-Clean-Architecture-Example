@@ -39,12 +39,16 @@ extension AppSyncDataEntity: AppData {
 }
 
 final class CoreDataAppsRepository: AppsRepository {
+    private let userDefaults: UserDefaults
+    private lazy var context: NSManagedObjectContext = .mr_default()
+    
     var lastSyncDate: Date? {
-        get { return UserDefaults.standard.value(forKey:"lastSyncDate") as? Date }
-        set(value) { UserDefaults.standard.set(value, forKey: "lastSyncDate") }
+        get { return userDefaults.value(forKey:"lastSyncDate") as? Date }
+        set(value) { userDefaults.set(value, forKey: "lastSyncDate") }
     }
     
-    init() {
+    init(userDefaults: UserDefaults = .standard) {
+        self.userDefaults = userDefaults
         configureCoreDataStack()
     }
     
@@ -53,15 +57,23 @@ final class CoreDataAppsRepository: AppsRepository {
     }
     
     func listCategories() -> [String] {
-        let request = AppSyncDataEntity.mr_requestAllSorted(by: "a_category", ascending: true)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "AppSyncDataEntity")
         
+        request.sortDescriptors = [
+            NSSortDescriptor(
+                key: "a_category",
+                ascending: true
+            )
+        ]
         request.returnsDistinctResults = true
         request.propertiesToFetch = ["a_category"]
         request.resultType = .dictionaryResultType
         
         do {
-            let result = try NSManagedObjectContext.mr_default().fetch(request)
-            return (result as! [NSDictionary]).map { $0["a_category"] as! String }
+            guard let result = try context.fetch(request) as? [NSDictionary] else {
+                return []
+            }
+            return result.compactMap { $0["a_category"] as? String }
         } catch {
             return []
         }
@@ -87,19 +99,21 @@ final class CoreDataAppsRepository: AppsRepository {
     func save(apps: [AppData], completion: @escaping (SaveStatus) -> Void) {
         MagicalRecord.save({ (ctx) in
             for app in apps {
-                let entity = AppSyncDataEntity.mr_createEntity(in: ctx)
+                guard let entity = AppSyncDataEntity.mr_createEntity(in: ctx) else {
+                    continue
+                }
                 
-                entity?.a_appstoreID = app.appstoreID
-                entity?.a_artist = app.artist
-                entity?.a_rights = app.rights
-                entity?.a_category = app.category
-                entity?.a_detailName = app.detailName
-                entity?.a_shortName = app.shortName
-                entity?.a_summary = app.summary
-                entity?.a_releaseDate = app.releaseDate
-                entity?.a_bannerURL = app.bannerURL?.absoluteString
-                entity?.a_iconURL = app.iconURL?.absoluteString
-                entity?.a_rank = NSNumber(integerLiteral: app.rank)
+                entity.a_appstoreID = app.appstoreID
+                entity.a_artist = app.artist
+                entity.a_rights = app.rights
+                entity.a_category = app.category
+                entity.a_detailName = app.detailName
+                entity.a_shortName = app.shortName
+                entity.a_summary = app.summary
+                entity.a_releaseDate = app.releaseDate
+                entity.a_bannerURL = app.bannerURL?.absoluteString
+                entity.a_iconURL = app.iconURL?.absoluteString
+                entity.a_rank = NSNumber(integerLiteral: app.rank)
             }
         }) { [weak self] (succeed, _) in
             self?.lastSyncDate = Date()

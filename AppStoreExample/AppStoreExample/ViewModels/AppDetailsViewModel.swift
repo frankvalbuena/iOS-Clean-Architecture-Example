@@ -37,11 +37,11 @@ final class AppDetailsViewModel {
         guard let bannerURL = details.bannerURL else {
             return
         }
-        self.imageDownloader.download(URLRequest(url: bannerURL)) { [weak self] response in
+        self.imageDownloader.download(URLRequest(url: bannerURL), completion:  { [weak self] response in
             if case .success(let image) = response.result {
                 self?.banner = image
                 self?.onBannerLoaded?()
             }
-        }
+        })
     }
 }
